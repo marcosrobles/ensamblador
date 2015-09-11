@@ -1,0 +1,23 @@
+LINEA ETIQUETA CODOP    OPERANDO
+-----------------------------------------
+2	ORG	null	null
+
+3	Et1	null	null
+
+3	Et1	equ	null
+
+3	Et1	equ	$ffFF
+
+4	dos	equ	$ffFF
+
+4	dos	LDAA	$ffFF
+
+4	dos	LDAA	@4732
+
+5	dos	SWI	@4732
+
+6	dos	DS.b	@4732
+
+6	dos	DS.b	%0011000011111100
+
+9	tres	DS.b	%0011000011111100
