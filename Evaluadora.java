@@ -13,20 +13,35 @@ import   java.util.regex.Pattern;
  */
 public class Evaluadora {
       Errores maneja_errores = new Errores();
-      String [] cadenainst = new String[3];
       String lineainstruccion="";
       boolean end_encontrado=false;
-     
+      boolean et_valida, codop_valido,op_valido;
+       
       
     /**
      * Evalua la etiqueta mediante el uso de expresiones regulares y funciones de la clase String
      * @param{String}etiqueta,{short cuentalineas,File seleccionado}
      *@return{void}
       */ 
+        
+        public Evaluadora()
+        {
+         et_valida=false;
+         codop_valido=false;
+         op_valido=false;
+        }
+        
+        public Evaluadora(boolean et_valida,boolean codop_valido,boolean op_valido)
+        {
+         this.et_valida=et_valida;
+         this.codop_valido=codop_valido;
+         this.op_valido=op_valido;
+        }
+        
     public void EvaluarEtiqueta(String etiqueta,short cuentalineas ,File seleccionado,boolean et_sola)
     {
 
-        boolean et_valida=false;
+       
         int longitud=0;
         
          int etiqueta_mayus = etiqueta.compareToIgnoreCase("END"); 
@@ -36,14 +51,21 @@ public class Evaluadora {
             end_encontrado=true;
         }
          //Expresion regular para evaluar etiquetas
-        Pattern patron_etiqueta = Pattern.compile("^[a-zA-Z]{1}[a-zA-Z0-9_]+");
+        Pattern patron_etiqueta = Pattern.compile("^[a-zA-Z]{1}[a-zA-Z0-9_]{0,7}");
         Matcher comprobador = patron_etiqueta.matcher(etiqueta);
         et_valida = comprobador.matches();
+        
+        if((longitud = etiqueta.length()) > 8)
+                 {               
+                     maneja_errores.errores_etiqueta(cuentalineas,2,seleccionado);  
+                     et_valida=false;
+                 }
+        
        
         if(et_valida==true)
         {
-               cadenainst[0]=etiqueta;
-            EscribeLinea(cadenainst, seleccionado,cuentalineas);
+             
+           
           if(et_sola==true)
           {
               //etiqueta sola
@@ -56,10 +78,7 @@ public class Evaluadora {
             maneja_errores.errores_etiqueta(cuentalineas,1,seleccionado);
         }
         
-         if((longitud = etiqueta.length()) > 8)
-                 {               
-                     maneja_errores.errores_etiqueta(cuentalineas,2,seleccionado);            
-                 }
+         
         
     }
     
@@ -71,7 +90,6 @@ public class Evaluadora {
     public void EvaluarCodop(String codop, short cuentalineas, File seleccionado)
     {
         
-        boolean codop_valido=false;
         int longitud=0;
         int codop_mayus = codop.compareToIgnoreCase("END"); 
         if(codop_mayus == 0)//Encontro la directiva END en la posicion correcta y paramos la lectura
@@ -84,11 +102,18 @@ public class Evaluadora {
         Pattern patron_etiqueta = Pattern.compile("[a-zA-Z][a-zA-Z.]{0,4}");
         Matcher comprobador = patron_etiqueta.matcher(codop);
         codop_valido = comprobador.matches();
+        
+          if((longitud = codop.length()) > 5)
+                 {               
+                     maneja_errores.errores_codop(cuentalineas,2,seleccionado);  
+                     codop_valido=false;
+                 }
+        
        
         if(codop_valido==true)
         {
-           cadenainst[1]=codop;
-            EscribeLinea(cadenainst, seleccionado,cuentalineas);
+       
+           
         }
         if(codop_valido==false)
         {
@@ -97,11 +122,7 @@ public class Evaluadora {
             maneja_errores.errores_codop(cuentalineas,1,seleccionado);
         }
         
-         if((longitud = codop.length()) > 5)
-                 {               
-                     maneja_errores.errores_codop(cuentalineas,2,seleccionado);            
-                 }
-        
+       
     }
     
     /**
@@ -111,8 +132,8 @@ public class Evaluadora {
       */ 
     public void EvaluarOperando(String operando, short cuentalineas, File seleccionado)
     {
-          cadenainst[2]=operando;
-           EscribeLinea(cadenainst, seleccionado,cuentalineas);
+
+           
           int operando_mayus = operando.compareToIgnoreCase("END"); 
         if(operando_mayus == 0)//Encontro la directiva END en la posicion incorrecta y retorna error
         {
@@ -121,17 +142,14 @@ public class Evaluadora {
     }
     
     
-    public void EscribeLinea(String[] cadenainst,File seleccionado,short cuentalineas)
+    public void EscribeLinea(String cadenainst,File seleccionado)
     {
-        String etiqueta,codop,operando="";
-        for(String elemento:cadenainst){
-           elemento="";   
+        if(et_valida&&codop_valido == true)
+        {
+        Ensamblador.writeFileInst(cadenainst, seleccionado);
         }
-       etiqueta = cadenainst[0];
-       codop = cadenainst[1];
-       operando = cadenainst[2];
-           lineainstruccion = cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando;
-        Ensamblador.writeFileInst(lineainstruccion, seleccionado);
+       else
+        {
       }
-    
+    }
 }

@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 
 
 public class Linea {
-    Evaluadora evalua_lineas = new Evaluadora();
+    
   
     Errores maneja_errores =new Errores();
     String lineainstrucciones="";
@@ -59,6 +59,7 @@ public class Linea {
       */ 
     public void separarlinea(File seleccionado)
     {
+        Evaluadora evalua_lineas = new Evaluadora();
         boolean et=false,cod=false,op=false;
          boolean et_sola=false;
          int es_etiqueta=1,es_codop=1,es_operando=1;
@@ -108,7 +109,7 @@ public class Linea {
                       operando = null;
                     lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando;
                     evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
-                    
+                    evalua_lineas.EscribeLinea(lineainstrucciones, seleccionado);
                  
                       break;
                       //
@@ -125,7 +126,7 @@ public class Linea {
                       lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando;
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
-                  
+                      evalua_lineas.EscribeLinea(lineainstrucciones, seleccionado);
                       break;
                   default://OTRO
                       error="Numero de tokens excedido"; 
@@ -167,6 +168,8 @@ public class Linea {
                       operando = null;
                       lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando;
                       evalua_lineas.EvaluarEtiqueta(etiqueta,cuentalineas,seleccionado,et_sola);
+                      evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
+                      evalua_lineas.EscribeLinea(lineainstrucciones, seleccionado);
                      
               
                       break;
@@ -184,6 +187,7 @@ public class Linea {
                       evalua_lineas.EvaluarEtiqueta(etiqueta,cuentalineas,seleccionado,et_sola);
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
+                      evalua_lineas.EscribeLinea(lineainstrucciones, seleccionado);
         
                       break;
                   default://OTRO

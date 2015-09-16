@@ -102,7 +102,7 @@ public class Ensamblador {
                 linea.quitarcomentarios(cadena);
                 linea.separarlinea(seleccionado);               
             }  
-             if(linea.evalua_lineas.end_encontrado==false)
+             if(evalua_lineas.end_encontrado==false)
              {
                  maneja_errores.errores_end(linea.cuentalineas,2,seleccionado);
              }
