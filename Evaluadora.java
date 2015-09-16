@@ -15,7 +15,8 @@ public class Evaluadora {
       Errores maneja_errores = new Errores();
       String lineainstruccion="";
       boolean end_encontrado=false;
-      boolean et_valida, codop_valido,op_valido;
+       boolean et_valida, codop_valido,op_valido=false;
+  
        
       
     /**
@@ -24,19 +25,9 @@ public class Evaluadora {
      *@return{void}
       */ 
         
-        public Evaluadora()
-        {
-         et_valida=false;
-         codop_valido=false;
-         op_valido=false;
-        }
+       
         
-        public Evaluadora(boolean et_valida,boolean codop_valido,boolean op_valido)
-        {
-         this.et_valida=et_valida;
-         this.codop_valido=codop_valido;
-         this.op_valido=op_valido;
-        }
+    
         
     public void EvaluarEtiqueta(String etiqueta,short cuentalineas ,File seleccionado,boolean et_sola)
     {
@@ -99,7 +90,7 @@ public class Evaluadora {
         }
         
          //Expresion regular para evaluar el codop
-        Pattern patron_etiqueta = Pattern.compile("[a-zA-Z][a-zA-Z.]{0,4}");
+        Pattern patron_etiqueta = Pattern.compile("[a-zA-Z]([a-zA-Z]{0,4}|[.]{1})");
         Matcher comprobador = patron_etiqueta.matcher(codop);
         codop_valido = comprobador.matches();
         
@@ -112,7 +103,7 @@ public class Evaluadora {
        
         if(codop_valido==true)
         {
-       
+           
            
         }
         if(codop_valido==false)
@@ -142,14 +133,5 @@ public class Evaluadora {
     }
     
     
-    public void EscribeLinea(String cadenainst,File seleccionado)
-    {
-        if(et_valida&&codop_valido == true)
-        {
-        Ensamblador.writeFileInst(cadenainst, seleccionado);
-        }
-       else
-        {
-      }
-    }
+  
 }
