@@ -81,10 +81,10 @@ public class Errores {
         //Automata que retorna el tipo de error que se encontro en el operando
         switch(tipo_de_error)
         {
-            case 1:  error="No especificado";
+            case 1:  error="Requiere operando";
                writeFileErrores(cuentalineas,error,seleccionado);
                 break;
-            case 2:  error="No especificado";
+            case 2:  error="No requiere operando";
                writeFileErrores(cuentalineas,error,seleccionado);
                 break;
             

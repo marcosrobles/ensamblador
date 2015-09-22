@@ -1,9 +1,2 @@
 LINEA ETIQUETA CODOP    OPERANDO
 -----------------------------------------
-1	ETQ1	COD	OPER1
-
-5	Et1	equ	$ffFF
-
-6	dos	LDAA	@4732
-
-11	tres	sWi	null

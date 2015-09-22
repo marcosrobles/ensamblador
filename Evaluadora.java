@@ -12,9 +12,13 @@ import   java.util.regex.Pattern;
  * @author Marcos
  */
 public class Evaluadora {
+      Ensamblador hc12 = new Ensamblador();
       Errores maneja_errores = new Errores();
+      LineaTabop linea_tabop = new LineaTabop();
+      Arbol maneja_modos_dir = new Arbol();
       String lineainstruccion="";
-      boolean end_encontrado=false;
+       
+     
        boolean et_valida, codop_valido,op_valido=false;
   
        
@@ -39,7 +43,7 @@ public class Evaluadora {
         if(etiqueta_mayus == 0)//Encontro la directiva END en la posicion incorrecta y retorna error
         {
             maneja_errores.errores_end(cuentalineas,1,seleccionado); 
-            end_encontrado=true;
+            hc12.end_encontrado=true;
         }
          //Expresion regular para evaluar etiquetas
         Pattern patron_etiqueta = Pattern.compile("^[a-zA-Z]{1}[a-zA-Z0-9_]{0,7}");
@@ -85,7 +89,7 @@ public class Evaluadora {
         int codop_mayus = codop.compareToIgnoreCase("END"); 
         if(codop_mayus == 0)//Encontro la directiva END en la posicion correcta y paramos la lectura
         {
-            end_encontrado=true;
+            hc12.end_encontrado=true;
             System.exit(0);
         }
         
@@ -103,8 +107,7 @@ public class Evaluadora {
        
         if(codop_valido==true)
         {
-           
-           
+           hc12.leerTabop(codop);    
         }
         if(codop_valido==false)
         {
@@ -121,17 +124,40 @@ public class Evaluadora {
      * @param{String}operando,{short cuentalineas,File seleccionado}
      *@return{void}
       */ 
+    
+     
+    
+    
     public void EvaluarOperando(String operando, short cuentalineas, File seleccionado)
     {
 
-           
-          int operando_mayus = operando.compareToIgnoreCase("END"); 
-        if(operando_mayus == 0)//Encontro la directiva END en la posicion incorrecta y retorna error
+        if(maneja_modos_dir.requiere_operando==true)
         {
-            maneja_errores.errores_end(cuentalineas,1,seleccionado);
+            if(operando==null)
+            {
+                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
+            }
+            else
+            {
+                //evaluar operando y validarlo
+                op_valido=true;
+            }
+            
+           
         }
+        else//No requiere operando
+        {
+            if(operando!=null)
+            {//si el codop no fue encontrado en tabop, decirle aqui que no evalue el operando o asi
+                 int operando_mayus = operando.compareToIgnoreCase("END"); 
+                 if(operando_mayus == 0)//Encontro la directiva END en la posicion incorrecta y retorna error
+                 {
+                   maneja_errores.errores_end(cuentalineas,1,seleccionado);
+                 }
+                maneja_errores.errores_operando(cuentalineas, 2, seleccionado);
+            }
+        }
+        
+        
     }
-    
-    
-  
 }

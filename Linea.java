@@ -112,6 +112,7 @@ public class Linea {
                       operando = null;
                     lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando;
                     evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
+                    evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
                     evalua_lineas.et_valida=true;
                     EscribeLinea(lineainstrucciones, seleccionado);
                  
@@ -174,6 +175,7 @@ public class Linea {
                       lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando;
                       evalua_lineas.EvaluarEtiqueta(etiqueta,cuentalineas,seleccionado,et_sola);
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
+                      evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
                       EscribeLinea(lineainstrucciones, seleccionado);
                      
               
@@ -208,7 +210,7 @@ public class Linea {
     
       public void EscribeLinea(String cadenainst,File seleccionado)
     {
-        if(evalua_lineas.et_valida&&evalua_lineas.codop_valido == true)
+        if(evalua_lineas.et_valida&&evalua_lineas.codop_valido && evalua_lineas.op_valido == true)
         {
         Ensamblador.writeFileInst(cadenainst, seleccionado);
         }
