@@ -123,10 +123,8 @@ public class Linea {
                     
                     
                     evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
-                    for(String elemento:maneja_modos_dir.modoslinea)
-             
-              System.out.println(elemento);
-                  //  evalua_lineas.EvaluarModosDir();
+                   
+                     evalua_lineas.EvaluarModosDir();
                     evalua_lineas.et_valida=true;
                     EscribeLinea(lineainstrucciones, seleccionado);
                  
@@ -145,7 +143,7 @@ public class Linea {
                       lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando;
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
-                      //evalua_lineas.EvaluarModosDir();
+                      evalua_lineas.EvaluarModosDir();
                       evalua_lineas.et_valida=true;
                       EscribeLinea(lineainstrucciones, seleccionado);
                       break;
@@ -191,7 +189,7 @@ public class Linea {
                       evalua_lineas.EvaluarEtiqueta(etiqueta,cuentalineas,seleccionado,et_sola);
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
-                    //  evalua_lineas.EvaluarModosDir();
+                     evalua_lineas.EvaluarModosDir();
                       EscribeLinea(lineainstrucciones, seleccionado);
                      
               
@@ -210,7 +208,7 @@ public class Linea {
                       evalua_lineas.EvaluarEtiqueta(etiqueta,cuentalineas,seleccionado,et_sola);
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
-                      //evalua_lineas.EvaluarModosDir();
+                      evalua_lineas.EvaluarModosDir();
                       EscribeLinea(lineainstrucciones, seleccionado);
         
                       break;

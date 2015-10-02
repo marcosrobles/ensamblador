@@ -23,6 +23,7 @@ public class Ensamblador {
      boolean end_encontrado=false;
       boolean codop_encontrado=false;
   boolean requiere_operando=false;
+   String modoslinea[]=new String[10];
     LineaTabop linea_tabop = new LineaTabop();
     Errores maneja_errores = new Errores();
    
@@ -126,6 +127,7 @@ public class Ensamblador {
     {
      String cadena_tabop="";
      String [] tokenstabop = new String[7];
+      
        Arbol maneja_modos_dir = new Arbol();
   
          try
@@ -168,6 +170,7 @@ public class Ensamblador {
              }
             } 
               maneja_modos_dir.obtener();//muestra los modos de direccionamiento de cada codop
+              modoslinea = maneja_modos_dir.modoslinea;
              /* 
               for(String elemento:maneja_modos_dir.modoslinea)
               if(elemento!=null)

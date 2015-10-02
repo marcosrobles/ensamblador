@@ -165,9 +165,11 @@ public class Evaluadora {
     
     public void EvaluarModosDir()
     {
-      //  for(String elemento:modoslinea)
-             
-        //      System.out.println(elemento);
+        for(String elemento:hc12.modoslinea)
+        {
+             if(elemento!=null)
+              System.out.println(elemento);
+        }
     }
     
     

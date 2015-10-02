@@ -48,12 +48,9 @@ public class Arbol {
     int llamadas_obtener=0;
     
     
-    public void inicializar()
-    {
-        for(String elemento:modoslinea)
-             
-              elemento="";
-    }
+ 
+   
+    
     public boolean tieneraiz()
     {
         if(raiz==null) 
@@ -123,7 +120,7 @@ public class Arbol {
                 Obtenernodos(raiz);
             }
     
-    public void Obtenernodos(Nodo nod)
+    public String[] Obtenernodos(Nodo nod)
             {
               
             
@@ -134,7 +131,7 @@ public class Arbol {
                  Obtenernodos(nod.nododerecho);
                  Obtenernodos(nod.nodoizquierdo);
               }  
-                
+                return modoslinea;
                 
             }
     
