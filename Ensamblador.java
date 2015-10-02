@@ -127,7 +127,7 @@ public class Ensamblador {
      String cadena_tabop="";
      String [] tokenstabop = new String[7];
        Arbol maneja_modos_dir = new Arbol();
-   
+  
          try
         {    
            BufferedReader br = new BufferedReader(new FileReader("D:\\Documents\\NetBeansProjects\\Ensamblador\\src\\ensamblador\\tabop.txt"));  
@@ -155,8 +155,8 @@ public class Ensamblador {
                  int bytescalculados = Integer.parseInt(tokenstabop[4]);
                  int bytesporcalcular = Integer.parseInt(tokenstabop[5]);
                  int totaldebytes = Integer.parseInt(tokenstabop[6]);
-                  maneja_modos_dir.Insertar(tokenstabop[2], tokenstabop[3], bytescalculados, bytesporcalcular, totaldebytes);
-     
+                 maneja_modos_dir.Insertar(tokenstabop[2], tokenstabop[3], bytescalculados, bytesporcalcular, totaldebytes);
+       
              }
          else
          {
@@ -167,8 +167,13 @@ public class Ensamblador {
     
              }
             } 
-         
-          maneja_modos_dir.obtener();//muestra los modos de direccionamiento de cada codop
+              maneja_modos_dir.obtener();//muestra los modos de direccionamiento de cada codop
+             /* 
+              for(String elemento:maneja_modos_dir.modoslinea)
+              if(elemento!=null)
+              System.out.println(elemento);
+             */  
+          //maneja_modos_dir.obtener();//muestra los modos de direccionamiento de cada codop
           br.close();
         }
         catch(FileNotFoundException fnfex){//Si no se encuentra el archivo, le notifica al usuario

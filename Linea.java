@@ -24,6 +24,8 @@ public class Linea {
     String error="";
     short cuentalineas=0;
     int cuentatokens=0;
+  Arbol maneja_modos_dir = new Arbol();
+    
    
     
    
@@ -112,7 +114,19 @@ public class Linea {
                       operando = null;
                     lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando;
                     evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
+                    //Aqui necesito tokenizar maneja_modos_dir.modoslinea 
+                    //Necesito crear un metodo EvaluarModosDir en Evaluadora donde reciba como parametro
+                    //los modos de direccionamiento que guarde en un arreglo de strings(modoslinea)
+                    //el token que contiene el modo de direccionamiento, y segun sea este lo clasifique en un switch
+                    //Y entonces ahi es donde se evaluara posteriormente cada modo de direccionamiento
+                    
+                    
+                    
                     evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
+                    for(String elemento:maneja_modos_dir.modoslinea)
+             
+              System.out.println(elemento);
+                  //  evalua_lineas.EvaluarModosDir();
                     evalua_lineas.et_valida=true;
                     EscribeLinea(lineainstrucciones, seleccionado);
                  
@@ -131,6 +145,7 @@ public class Linea {
                       lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando;
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
+                      //evalua_lineas.EvaluarModosDir();
                       evalua_lineas.et_valida=true;
                       EscribeLinea(lineainstrucciones, seleccionado);
                       break;
@@ -176,6 +191,7 @@ public class Linea {
                       evalua_lineas.EvaluarEtiqueta(etiqueta,cuentalineas,seleccionado,et_sola);
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
+                    //  evalua_lineas.EvaluarModosDir();
                       EscribeLinea(lineainstrucciones, seleccionado);
                      
               
@@ -194,6 +210,7 @@ public class Linea {
                       evalua_lineas.EvaluarEtiqueta(etiqueta,cuentalineas,seleccionado,et_sola);
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
+                      //evalua_lineas.EvaluarModosDir();
                       EscribeLinea(lineainstrucciones, seleccionado);
         
                       break;

@@ -10,7 +10,8 @@ package ensamblador;
  * @author Marcos
  */
 public class Arbol {
-    // Evaluadora evalua_lineas = new Evaluadora();
+    //Linea linea = new Linea();
+   // Evaluadora evalua_lineas = new Evaluadora();
 
     /**
      * @param args the command line arguments
@@ -40,10 +41,19 @@ public class Arbol {
         }
     }
     
-    
+   
     Nodo raiz=null;
     boolean requiere_operando=false;
+    public   String modoslinea[]=new String[10]; 
+    int llamadas_obtener=0;
     
+    
+    public void inicializar()
+    {
+        for(String elemento:modoslinea)
+             
+              elemento="";
+    }
     public boolean tieneraiz()
     {
         if(raiz==null) 
@@ -55,12 +65,7 @@ public class Arbol {
     
     public Arbol Insertar(String mododir,String codigocalculado, int bytescalculados, int bytesporcalcular, int totaldebytes)
     {
-        if(bytesporcalcular!=0)//si hay uno o mas bits por calcular si tiene operando
-                      {
-                         requiere_operando=true;
-                        // evalua_lineas.EvaluarOperando(mododir, cuentalineas, null);
-                         
-                      }
+      
         
         if(!tieneraiz())//si no hay nada en la raiz
         {
@@ -120,12 +125,17 @@ public class Arbol {
     
     public void Obtenernodos(Nodo nod)
             {
-              if(nod==null)
-                  return;
               
-              System.out.println(""+nod.mododir+" "+nod.codigocalculado+" "+nod.bytescalculados+" "+nod.bytesporcalcular+" "+nod.totaldebytes);
+            
+              if(nod!=null)
+              {
+                  llamadas_obtener++; 
+                 modoslinea[llamadas_obtener] = ""+nod.mododir+" "+nod.codigocalculado+" "+nod.bytescalculados+" "+nod.bytesporcalcular+" "+nod.totaldebytes;
                  Obtenernodos(nod.nododerecho);
                  Obtenernodos(nod.nodoizquierdo);
+              }  
+                
+                
             }
     
    

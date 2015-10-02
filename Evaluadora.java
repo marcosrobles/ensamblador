@@ -15,8 +15,9 @@ public class Evaluadora {
       Ensamblador hc12 = new Ensamblador();
       Errores maneja_errores = new Errores();
       LineaTabop linea_tabop = new LineaTabop();
-      Arbol maneja_modos_dir = new Arbol();
+     // Arbol maneja_modos_dir = new Arbol();
       String lineainstruccion="";
+ 
        
      
        boolean et_valida, codop_valido,op_valido=false;
@@ -131,8 +132,8 @@ public class Evaluadora {
     public void EvaluarOperando(String operando, short cuentalineas, File seleccionado)
     {
 
-        if(maneja_modos_dir.requiere_operando==true)
-        {
+       // if(maneja_modos_dir.requiere_operando==true)
+        //{
             if(operando==null)
             {
                 maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
@@ -144,9 +145,9 @@ public class Evaluadora {
             }
             
            
-        }
-        else//No requiere operando
-        {
+        //}
+       // else//No requiere operando
+        //{
             if(operando!=null)
             {//si el codop no fue encontrado en tabop, decirle aqui que no evalue el operando o asi
                  int operando_mayus = operando.compareToIgnoreCase("END"); 
@@ -156,8 +157,19 @@ public class Evaluadora {
                  }
                 maneja_errores.errores_operando(cuentalineas, 2, seleccionado);
             }
-        }
+        //}
         
         
     }
+    
+    
+    public void EvaluarModosDir()
+    {
+      //  for(String elemento:modoslinea)
+             
+        //      System.out.println(elemento);
+    }
+    
+    
+    
 }

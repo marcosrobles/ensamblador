@@ -1,17 +1,29 @@
 LINEA ERROR
 -----------------------------------------
+1	Requiere operando
+
 2	No requiere operando
 
 3	Caracteres invalidos en el codop
+
+3	Requiere operando
 
 4	Tamaño maximo(5) sobrepasado en el codop
 
 4	Caracteres invalidos en el codop
 
+4	Requiere operando
+
 5	Caracteres invalidos en el codop
+
+5	Requiere operando
 
 6	No requiere operando
 
 7	No requiere operando
 
+8	Requiere operando
+
 9	No requiere operando
+
+12	Requiere operando
