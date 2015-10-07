@@ -67,7 +67,9 @@ public class Errores {
             case 2:error="Tamaño maximo(5) sobrepasado en el codop";
                   writeFileErrores(cuentalineas,error,seleccionado);
                 break;
-            
+            case 3: error="El codop no se encuentra en el tabop"; 
+                    writeFileErrores(cuentalineas,error,seleccionado);
+                break;
         }
     }
     

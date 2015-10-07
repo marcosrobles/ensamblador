@@ -20,7 +20,7 @@ public class Linea {
     Errores maneja_errores =new Errores();
     String lineainstrucciones="";
     String [] guarda_tokens = new String[3];
-    String linea=null,etiqueta=null,codop=null,operando=null;
+    String linea=null,etiqueta=null,codop=null,operando=null,modos=null;
     String error="";
     short cuentalineas=0;
     int cuentatokens=0;
@@ -112,20 +112,27 @@ public class Linea {
                       etiqueta = null;
                       codop = guarda_tokens[0];
                       operando = null;
-                    lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando;
+                  
                     evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
                     //Aqui necesito tokenizar maneja_modos_dir.modoslinea 
                     //Necesito crear un metodo EvaluarModosDir en Evaluadora donde reciba como parametro
                     //los modos de direccionamiento que guarde en un arreglo de strings(modoslinea)
                     //el token que contiene el modo de direccionamiento, y segun sea este lo clasifique en un switch
                     //Y entonces ahi es donde se evaluara posteriormente cada modo de direccionamiento
-                    
-                    
-                    
-                    evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
-                   
                      evalua_lineas.EvaluarModosDir();
+                      evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
                     evalua_lineas.et_valida=true;
+                    
+                     for(String elemento:maneja_modos_dir.modoslinea)
+                      {
+                          if(elemento!=null)
+                          {
+                              
+                        modos=modos+" "+elemento; 
+                          }
+                      }
+                      lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
+                    
                     EscribeLinea(lineainstrucciones, seleccionado);
                  
                       break;
@@ -140,11 +147,22 @@ public class Linea {
                       etiqueta = null;
                       codop = guarda_tokens[0];
                       operando = guarda_tokens[1];
-                      lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando;
+                  
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
-                      evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
                       evalua_lineas.EvaluarModosDir();
+                      evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);  
                       evalua_lineas.et_valida=true;
+                      
+                       for(String elemento:maneja_modos_dir.modoslinea)
+                      {
+                          if(elemento!=null)
+                          {
+                              
+                        modos=modos+" "+elemento; 
+                          }
+                      }
+                      lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
+                      
                       EscribeLinea(lineainstrucciones, seleccionado);
                       break;
                   default://OTRO
@@ -185,11 +203,22 @@ public class Linea {
                       etiqueta = guarda_tokens[0];
                       codop = guarda_tokens[1];
                       operando = null;
-                      lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando;
+           
                       evalua_lineas.EvaluarEtiqueta(etiqueta,cuentalineas,seleccionado,et_sola);
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
-                      evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
-                     evalua_lineas.EvaluarModosDir();
+                      evalua_lineas.EvaluarModosDir();
+                      evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);     
+                      
+                      for(String elemento:maneja_modos_dir.modoslinea)
+                      {
+                          if(elemento!=null)
+                          {
+                              
+                        modos=modos+" "+elemento; 
+                          }
+                      }
+                      lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
+                      
                       EscribeLinea(lineainstrucciones, seleccionado);
                      
               
@@ -204,11 +233,22 @@ public class Linea {
                       etiqueta = guarda_tokens[0];
                       codop = guarda_tokens[1];
                       operando = guarda_tokens[2];
-                      lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando;
+                     
                       evalua_lineas.EvaluarEtiqueta(etiqueta,cuentalineas,seleccionado,et_sola);
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
-                      evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
                       evalua_lineas.EvaluarModosDir();
+                      evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);   
+                      
+                       for(String elemento:maneja_modos_dir.modoslinea)
+                      {
+                          if(elemento!=null)
+                          {
+                              
+                        modos=modos+" "+elemento; 
+                          }
+                      }
+                      lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
+                      
                       EscribeLinea(lineainstrucciones, seleccionado);
         
                       break;

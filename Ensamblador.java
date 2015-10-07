@@ -27,6 +27,7 @@ public class Ensamblador {
     LineaTabop linea_tabop = new LineaTabop();
     Errores maneja_errores = new Errores();
    
+    
 //    Evaluadora evalua_lineas = new Evaluadora();
     
     
@@ -50,7 +51,7 @@ public class Ensamblador {
             System.exit(0);
         }
         
-        //ENCABEZADO DE ARCHIVO DE INSTRUCCIONES Y ARCHIVO DE ERRORES
+        //ENCABEZADO DE ARCHIVO DE INSTRUCCIONES
          String path_inst,path_err=""; 
         String [] guarda = new String[2];
        
@@ -68,9 +69,9 @@ public class Ensamblador {
            BufferedWriter bwi = new BufferedWriter(new FileWriter(path_inst));  
            BufferedReader bri = new BufferedReader(new FileReader(path_inst));
 
-             bwi.write("LINEA ETIQUETA CODOP    OPERANDO");
+             bwi.write("LINEA ETIQUETA CODOP    OPERANDO    MODOS                       ");
              bwi.newLine();
-             bwi.write("-----------------------------------------");
+             bwi.write("-----------------------------------------------------------------");
           bwi.close();
         }
         catch(FileNotFoundException fnfex){//Si no se encuentra el archivo, le notifica al usuario
@@ -125,6 +126,8 @@ public class Ensamblador {
      
     public void leerTabop(String codop)
     {
+        Linea linea = new Linea();
+        Evaluadora evalua_lineas =new Evaluadora();
      String cadena_tabop="";
      String [] tokenstabop = new String[7];
       
@@ -144,6 +147,7 @@ public class Ensamblador {
          
          if((codop_encontrado = (cadena_tabop.contains(codop))==true))//si encuentra el codop dentro de linea_tabob
              {
+               
              // guardar las lineas con el mismo codop  en una estructura 
              // y evaluar 
                   //System.out.println(cadena_tabop);
@@ -158,13 +162,18 @@ public class Ensamblador {
                  int bytesporcalcular = Integer.parseInt(tokenstabop[5]);
                  int totaldebytes = Integer.parseInt(tokenstabop[6]);
                  maneja_modos_dir.Insertar(tokenstabop[2], tokenstabop[3], bytescalculados, bytesporcalcular, totaldebytes);
+                 break;
        
              }
          else
          {
+             codop_encontrado=false;
              //invocar a errores de codop indicando que no se encuentra en la tabla tabop
+              
              //poner codop_valido como falso para que no escriba en .isnt o agregar codop_encontrado==true
+            
              //en el metodo escribirinst para que solo escriba si se encontro el codop
+             
          }
     
              }

@@ -1,13 +1,11 @@
-LINEA ETIQUETA CODOP    OPERANDO
------------------------------------------
-2	null	ADCA	algo
+LINEA ETIQUETA CODOP    OPERANDO    MODOS                       
+-----------------------------------------------------------------
+1	null	ABA	null		null
 
-6	Et1	equ	$ffFF
+2	null	ADCA	algo		null
 
-7	dos	LDAA	@4732
+7	dos	LDAA	@4732		null
 
-8	null	SWI	null
+8	null	SWI	null		null
 
-9	null	DES	%0011000011111100
-
-12	tres	sWi	null
+12	tres	sWi	null		null
