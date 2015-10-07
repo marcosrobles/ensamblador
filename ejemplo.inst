@@ -1,11 +1,11 @@
 LINEA ETIQUETA CODOP    OPERANDO    MODOS                       
------------------------------------------------------------------
-1	null	ABA	null		null
+--------------------------------------------------------------------------------
+1	null	ABA	null		 INH
 
-2	null	ADCA	algo		null
+2	null	ADCA	algo		 INM DIR EXT IDX IDX1 IDX2 [D,IDX] [IDX2]
 
-7	dos	LDAA	@4732		null
+7	dos	LDAA	@4732		 INM DIR EXT IDX IDX1 IDX2 [D,IDX] [IDX2]
 
-8	null	SWI	null		null
+8	null	SWI	null		 INH
 
-12	tres	sWi	null		null
+12	tres	sWi	null		 INH

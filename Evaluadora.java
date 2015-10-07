@@ -19,6 +19,7 @@ public class Evaluadora {
      // Arbol maneja_modos_dir = new Arbol();
       String lineainstruccion="";
       String []lineamodos=new String[5];
+      String modos="";
  
     
       String requiereoperando="";
@@ -114,6 +115,7 @@ public class Evaluadora {
             
             //mandar llamar metodo manejador de errores
             maneja_errores.errores_codop(cuentalineas,1,seleccionado);
+           
         }
         if(codop_valido==true)
         {
@@ -122,6 +124,7 @@ public class Evaluadora {
            {
                codop_valido=false;
                maneja_errores.errores_codop(cuentalineas,3,seleccionado);
+               
            }
            
         }
@@ -139,7 +142,7 @@ public class Evaluadora {
     
     public void EvaluarOperando(String operando, short cuentalineas, File seleccionado)
     {
-        if(codop_valido==false)//si es un codop invalido no es necesario evaluar el codop
+        if(codop_valido==false)//si es un codop invalido no es necesario evaluar el operando
         {
             
         }
@@ -292,19 +295,33 @@ public class Evaluadora {
     
     public void EvaluarModosDir()
     {
-       
-        for(String elemento:hc12.modoslinea)
+        if(codop_valido==false)//si es un codop invalido no es necesario evaluar el operando
+        {
+            
+        }
+        else
+        {
+            modos="";
+        
+        Arbol maneja_modos_dir = new Arbol();
+        for(String elemento:hc12.modoslinea)//este es el contenido del arbol
         {
              if(elemento!=null)
              {
-                System.out.println(elemento);
+            
                StringTokenizer tokenizar = new StringTokenizer(elemento);
                 byte x=0;
                       while (tokenizar.hasMoreTokens()) 
                         {  
-                            lineamodos[x]=tokenizar.nextToken();
+                           
+                             lineamodos[x]=tokenizar.nextToken();  
+                           
                              x++;
                         }
+                        if(lineamodos!=null)
+                          {
+                                modos=modos+" "+lineamodos[0]; 
+                          }
                       int bytesporcalcular = Integer.parseInt(lineamodos[2]);
                switch(lineamodos[0])
                {
@@ -384,7 +401,7 @@ public class Evaluadora {
        
         
      
-        
+        }    
     }
     
     

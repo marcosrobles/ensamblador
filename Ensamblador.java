@@ -22,6 +22,7 @@ public class Ensamblador {
     File seleccionado=null;
      boolean end_encontrado=false;
       boolean codop_encontrado=false;
+      boolean codop_encontrado_aux=false;
   boolean requiere_operando=false;
    String modoslinea[]=new String[10];
     LineaTabop linea_tabop = new LineaTabop();
@@ -71,7 +72,7 @@ public class Ensamblador {
 
              bwi.write("LINEA ETIQUETA CODOP    OPERANDO    MODOS                       ");
              bwi.newLine();
-             bwi.write("-----------------------------------------------------------------");
+             bwi.write("--------------------------------------------------------------------------------");
           bwi.close();
         }
         catch(FileNotFoundException fnfex){//Si no se encuentra el archivo, le notifica al usuario
@@ -137,17 +138,19 @@ public class Ensamblador {
         {    
            BufferedReader br = new BufferedReader(new FileReader("D:\\Documents\\NetBeansProjects\\Ensamblador\\src\\ensamblador\\tabop.txt"));  
         
-             
+         codop_encontrado=false;    
          while(((cadena_tabop=br.readLine()) != null)){ //mientras halla algo que leer y codopencontrado sea verdadero               
                   
                   StringTokenizer tokenizador = new StringTokenizer(cadena_tabop,"|");
                 if(cadena_tabop!=null)//si linea contiene algun caracter
                 {
                     codop = codop.toUpperCase();
-         
-         if((codop_encontrado = (cadena_tabop.contains(codop))==true))//si encuentra el codop dentro de linea_tabob
+                        
+            
+           
+         if((codop_encontrado_aux = (cadena_tabop.contains(codop))==true))//si encuentra el codop dentro de linea_tabob
              {
-               
+                 codop_encontrado=true;
              // guardar las lineas con el mismo codop  en una estructura 
              // y evaluar 
                   //System.out.println(cadena_tabop);
@@ -162,30 +165,25 @@ public class Ensamblador {
                  int bytesporcalcular = Integer.parseInt(tokenstabop[5]);
                  int totaldebytes = Integer.parseInt(tokenstabop[6]);
                  maneja_modos_dir.Insertar(tokenstabop[2], tokenstabop[3], bytescalculados, bytesporcalcular, totaldebytes);
-                 break;
-       
+               
+                 
+                 
              }
          else
          {
-             codop_encontrado=false;
-             //invocar a errores de codop indicando que no se encuentra en la tabla tabop
-              
-             //poner codop_valido como falso para que no escriba en .isnt o agregar codop_encontrado==true
-            
-             //en el metodo escribirinst para que solo escriba si se encontro el codop
-             
+         
          }
+         
     
              }
             } 
               maneja_modos_dir.obtener();//muestra los modos de direccionamiento de cada codop
               modoslinea = maneja_modos_dir.modoslinea;
-             /* 
-              for(String elemento:maneja_modos_dir.modoslinea)
+           /* 
+              for(String elemento:modoslinea)
               if(elemento!=null)
               System.out.println(elemento);
-             */  
-          //maneja_modos_dir.obtener();//muestra los modos de direccionamiento de cada codop
+              */
           br.close();
         }
         catch(FileNotFoundException fnfex){//Si no se encuentra el archivo, le notifica al usuario

@@ -123,14 +123,10 @@ public class Linea {
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
                     evalua_lineas.et_valida=true;
                     
-                     for(String elemento:maneja_modos_dir.modoslinea)
-                      {
-                          if(elemento!=null)
-                          {
-                              
-                        modos=modos+" "+elemento; 
-                          }
-                      }
+                  
+                     
+                        modos=evalua_lineas.modos; 
+                        
                       lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
                     
                     EscribeLinea(lineainstrucciones, seleccionado);
@@ -153,14 +149,7 @@ public class Linea {
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);  
                       evalua_lineas.et_valida=true;
                       
-                       for(String elemento:maneja_modos_dir.modoslinea)
-                      {
-                          if(elemento!=null)
-                          {
-                              
-                        modos=modos+" "+elemento; 
-                          }
-                      }
+                      modos=evalua_lineas.modos; 
                       lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
                       
                       EscribeLinea(lineainstrucciones, seleccionado);
@@ -209,14 +198,7 @@ public class Linea {
                       evalua_lineas.EvaluarModosDir();
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);     
                       
-                      for(String elemento:maneja_modos_dir.modoslinea)
-                      {
-                          if(elemento!=null)
-                          {
-                              
-                        modos=modos+" "+elemento; 
-                          }
-                      }
+                      modos=evalua_lineas.modos; 
                       lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
                       
                       EscribeLinea(lineainstrucciones, seleccionado);
@@ -239,14 +221,7 @@ public class Linea {
                       evalua_lineas.EvaluarModosDir();
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);   
                       
-                       for(String elemento:maneja_modos_dir.modoslinea)
-                      {
-                          if(elemento!=null)
-                          {
-                              
-                        modos=modos+" "+elemento; 
-                          }
-                      }
+                      modos=evalua_lineas.modos; 
                       lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
                       
                       EscribeLinea(lineainstrucciones, seleccionado);
