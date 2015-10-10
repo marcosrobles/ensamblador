@@ -89,6 +89,17 @@ public class Errores {
             case 2:  error="No requiere operando";
                writeFileErrores(cuentalineas,error,seleccionado);
                 break;
+             case 3:  error="Modo IMM requiere # al inicio";
+               writeFileErrores(cuentalineas,error,seleccionado);
+                break;
+             case 4: error="Este numero no es binario (El simbolo % indica que debe ser binario)";
+                  break;
+             case 5: error="Este numero no es octal (El simbolo @ indica que debe ser octal)";
+                  break;
+             case 6: error="Este numero no es hexadecimal (El simbolo $ indica que debe ser hexadecimal)";
+                  break;
+             case 7: error="Este numero no es decimal";
+                  break;
             
         }
     }

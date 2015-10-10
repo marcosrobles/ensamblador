@@ -24,7 +24,8 @@ public class Evaluadora {
     
       String requiereoperando="";
        boolean et_valida, codop_valido,op_valido=false;
-      
+       boolean es_binario,es_octal,es_hex,es_dec=false;
+       int rango;
   
        
       
@@ -142,28 +143,31 @@ public class Evaluadora {
     
     public void EvaluarOperando(String operando, short cuentalineas, File seleccionado)
     {
+        EvaluarModosDir();
+        char  basenum=' ';
         if(codop_valido==false)//si es un codop invalido no es necesario evaluar el operando
         {
             
         }
         else 
         {          
+            //Evaluo el operando segun el modo de direccionamiento identificado
         switch(requiereoperando)//todos solo entran al switch si requieren operando a exepcion del inherente
         {
                   case "INH": 
-                                if(operando==null)
+                                if(operando==null)   //si efectivamente no hay operando esta bien
                             {
                                  op_valido=true;
                             }
-                                else
-                                {
-                                    
+                                else    //si hay operando esta mal, no importan bases numericas ni nada en este modo
+                                {   
+                                   
                                    maneja_errores.errores_operando(cuentalineas, 2, seleccionado);
                                    op_valido=false;
                                 }
                                 
                                 break;
-                  case "INM":  
+                  case "IMM8":  
                                 if(operando==null)
                             {
                                 op_valido=false;
@@ -172,9 +176,154 @@ public class Evaluadora {
                             else
                             {
                                  //evaluar operando y validarlo
-                                op_valido=true;
+                                boolean inm = operando.startsWith("#",0);
+                                   if(inm==true)//si operando inicia con #
+                                   { //entonces evaluaremos lo demas.
+                                       op_valido=true;
+                                       
+                                       
+                                       basenum = operando.charAt(1);//obtenener que base numerica es
+                                       switch(basenum)  
+                                       {
+                                           
+                                           //Determinar si es de 8 bits(1 byte) o 16 bits(2 bytes) en bases a los bytescalculados de TABOP.txt 
+                                            //Usar expresiones regulares que evaluen si en verdad 
+                                            //el operando corresponde a la base numerica especificada
+                                           //evaluar si verdaderamente corresponde  a la base especificada          
+                                           //convertirlo a la base especificada
+                                           //Evaluar si excede el rango de 8 o 16 bit segun la base.
+                                           case '%'://BINARIO
+                                                    Pattern patron_base_binaria = Pattern.compile("(0|1)+");
+                                                    Matcher comprobadorbinario = patron_base_binaria.matcher(operando);
+                                                    es_binario = comprobadorbinario.matches();
+                                                    if(es_binario==false)
+                                                    {
+                                                         op_valido=false;
+                                                         maneja_errores.errores_operando(cuentalineas, 4, seleccionado);
+                                                    }
+                                                     String suboperando=""; 
+                                                     suboperando=operando.substring(2);
+                                                    rango =  Integer.parseInt(suboperando,10);
+                                                    System.out.println("rango: "+rango);
+                                                     
+                                                  
+                                                      break;
+                                           case '@'://OCTAL
+                                                    Pattern patron_base_octal = Pattern.compile("(0-7)+");
+                                                    Matcher comprobadoroctal = patron_base_octal.matcher(operando);
+                                                    es_octal = comprobadoroctal.matches();
+                                                    if(es_octal==false)
+                                                    {
+                                                         op_valido=false;
+                                                         maneja_errores.errores_operando(cuentalineas, 5, seleccionado);
+                                                    }
+                                                      break;
+                                           case '$': //HEXADECIMAL
+                                                    Pattern patron_base_hex = Pattern.compile("[0-9A-Fa-f]+");
+                                                    Matcher comprobador_hex = patron_base_hex.matcher(operando);
+                                                    es_hex = comprobador_hex.matches();
+                                                    if(es_hex==false)
+                                                    {
+                                                         op_valido=false;
+                                                         maneja_errores.errores_operando(cuentalineas, 6, seleccionado);
+                                                    }
+                                                      break;
+                                           default: //DECIMAL 
+                                                    Pattern patron_base_decimal = Pattern.compile("[0-9]+");
+                                                    Matcher comprobador_decimal = patron_base_decimal.matcher(operando);
+                                                    es_dec = comprobador_decimal.matches();
+                                                    if(es_dec==false)
+                                                    {
+                                                         op_valido=false;
+                                                         maneja_errores.errores_operando(cuentalineas, 7, seleccionado);
+                                                    }
+                                                    break;
+                                       }
+                                   }
+                                   else //operando en modo IMM no inicio con #
+                                   { //escribimos error en archivo .err
+                                       maneja_errores.errores_operando(cuentalineas, 3, seleccionado);
+                                       op_valido=false;
+                                   }
+                                
                             }
                                 break;
+                   case "IMM16":  
+                                if(operando==null)
+                            {
+                                op_valido=false;
+                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
+                            }
+                            else
+                            {
+                                 //evaluar operando y validarlo
+                                boolean inm = operando.startsWith("#",0);
+                                   if(inm==true)//si operando inicia con #
+                                   { //entonces evaluaremos lo demas.
+                                       op_valido=true;
+                                       
+                                       
+                                       basenum = operando.charAt(1);//obtenener que base numerica es
+                                       switch(basenum)  
+                                       {
+                                           
+                                           //Determinar si es de 8 bits(1 byte) o 16 bits(2 bytes) en bases a los bytescalculados de TABOP.txt 
+                                            //Usar expresiones regulares que evaluen si en verdad 
+                                            //el operando corresponde a la base numerica especificada
+                                           //evaluar si verdaderamente corresponde  a la base especificada
+                                           //Evaluar si excede el rango de 8 o 16 bit segun la base.
+                                           //convertirlo a la base especificada
+                                           case '%'://BINARIO
+                                                    Pattern patron_base_binaria = Pattern.compile("(0|1)+");
+                                                    Matcher comprobadorbinario = patron_base_binaria.matcher(operando);
+                                                    es_binario = comprobadorbinario.matches();
+                                                    if(es_binario==false)
+                                                    {
+                                                         op_valido=false;
+                                                         maneja_errores.errores_operando(cuentalineas, 4, seleccionado);
+                                                    }
+                                                  
+                                                      break;
+                                           case '@'://OCTAL
+                                                    Pattern patron_base_octal = Pattern.compile("(0-7)+");
+                                                    Matcher comprobadoroctal = patron_base_octal.matcher(operando);
+                                                    es_octal = comprobadoroctal.matches();
+                                                    if(es_octal==false)
+                                                    {
+                                                         op_valido=false;
+                                                         maneja_errores.errores_operando(cuentalineas, 5, seleccionado);
+                                                    }
+                                                      break;
+                                           case '$': //HEXADECIMAL
+                                                    Pattern patron_base_hex = Pattern.compile("[0-9A-Fa-f]+");
+                                                    Matcher comprobador_hex = patron_base_hex.matcher(operando);
+                                                    es_hex = comprobador_hex.matches();
+                                                    if(es_hex==false)
+                                                    {
+                                                         op_valido=false;
+                                                         maneja_errores.errores_operando(cuentalineas, 6, seleccionado);
+                                                    }
+                                                      break;
+                                           default: //DECIMAL 
+                                                    Pattern patron_base_decimal = Pattern.compile("[0-9]+");
+                                                    Matcher comprobador_decimal = patron_base_decimal.matcher(operando);
+                                                    es_dec = comprobador_decimal.matches();
+                                                    if(es_dec==false)
+                                                    {
+                                                         op_valido=false;
+                                                         maneja_errores.errores_operando(cuentalineas, 7, seleccionado);
+                                                    }
+                                                    break;
+                                       }
+                                   }
+                                   else //operando en modo IMM no inicio con #
+                                   { //escribimos error en archivo .err
+                                       maneja_errores.errores_operando(cuentalineas, 3, seleccionado);
+                                       op_valido=false;
+                                   }
+                                
+                            }
+                                break;   
                        
                    case "DIR":  
                                 if(operando==null)
@@ -260,7 +409,31 @@ public class Evaluadora {
                                 op_valido=true;
                             }
                                 break;
-                   case "REL":  
+                   case "REL8":  
+                                if(operando==null)
+                            {
+                                op_valido=false;
+                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
+                            }
+                            else
+                            {
+                                 //evaluar operando y validarlo
+                                op_valido=true;
+                            }
+                                break;
+                    case "REL9":  
+                                if(operando==null)
+                            {
+                                op_valido=false;
+                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
+                            }
+                            else
+                            {
+                                 //evaluar operando y validarlo
+                                op_valido=true;
+                            }
+                                break;
+                    case "REL16":  
                                 if(operando==null)
                             {
                                 op_valido=false;
@@ -275,15 +448,11 @@ public class Evaluadora {
                    
                    default: {
                        if(operando!=null)
-            {//si el codop no fue encontrado en tabop, decirle aqui que no evalue el operando o asi
-                 int operando_mayus = operando.compareToIgnoreCase("END"); 
-                 if(operando_mayus == 0)//Encontro la directiva END en la posicion incorrecta y retorna error
-                 {
-                   //Indicar que se encontro el end o parar el programa, aunque segun recuerdo eso lo hago en otra clase
-                 }
-                 op_valido=false;
-                maneja_errores.errores_operando(cuentalineas, 2, seleccionado);
-            }
+                         {//si el codop no fue encontrado en tabop, decirle aqui que no evalue el operando o asi
+                 
+                            op_valido=false;
+                            maneja_errores.errores_operando(cuentalineas, 2, seleccionado);
+                         }
             
                        }
         }
@@ -295,7 +464,7 @@ public class Evaluadora {
     
     public void EvaluarModosDir()
     {
-        if(codop_valido==false)//si es un codop invalido no es necesario evaluar el operando
+        if(codop_valido==false)//si es un codop invalido no es necesario evaluar el modo de direccionamiento
         {
             
         }
@@ -304,34 +473,51 @@ public class Evaluadora {
             modos="";
         
         Arbol maneja_modos_dir = new Arbol();
-        for(String elemento:hc12.modoslinea)//este es el contenido del arbol
+        for(String elemento:hc12.modoslinea)//este es el contenido del arbol que guarda los modos de 
+                                            //direccionamiento de cada codop
         {
              if(elemento!=null)
              {
-            
+           
                StringTokenizer tokenizar = new StringTokenizer(elemento);
                 byte x=0;
                       while (tokenizar.hasMoreTokens()) 
                         {  
-                           
+                           //aqui dividimos la linea para 
                              lineamodos[x]=tokenizar.nextToken();  
                            
                              x++;
                         }
+                      
+              }
+             
+        }
                         if(lineamodos!=null)
                           {
                                 modos=modos+" "+lineamodos[0]; 
                           }
                       int bytesporcalcular = Integer.parseInt(lineamodos[2]);
+                      //IDENTIFICO MODOS DE DIRECCIONAMIENTO DEL CODOP 
                switch(lineamodos[0])
                {
-                   case "INH":    requiereoperando="INH";//ya se que no requiere operando, pero lo mando a evaluar operando  
+                   case "INH":  
+                                System.out.println("Modo:"+lineamodos[0]);
+                                requiereoperando="INH";//ya se que no requiere operando, pero lo mando a evaluar operando  
                                 break;
-                   case "INM":  System.out.println("Modo:"+lineamodos[0]);
+                   case "IMM8":  System.out.println("Modo:"+lineamodos[0]);
                                   bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//requiere operando
                                    {
-                                      requiereoperando="INM";
+                                      requiereoperando="IMM8";
+                                     
+                                   }
+                                break;
+                    case "IMM16":  System.out.println("Modo:"+lineamodos[0]);
+                                  bytesporcalcular = Integer.parseInt(lineamodos[2]);
+                                   if(bytesporcalcular>0)//requiere operando
+                                   {
+                                      requiereoperando="IMM16";
+                                     
                                    }
                                 break;
                        
@@ -384,20 +570,32 @@ public class Evaluadora {
                                       requiereoperando="[IDX2]";
                                    }
                                 break;
-                   case "REL":  System.out.println("Modo:"+lineamodos[0]);
+                   case "REL8":  System.out.println("Modo:"+lineamodos[0]);
                                 bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//requiere operando
                                    {
-                                      requiereoperando="REL";
+                                      requiereoperando="REL8";
+                                   }
+                                break;
+                   case "REL9":  System.out.println("Modo:"+lineamodos[0]);
+                                bytesporcalcular = Integer.parseInt(lineamodos[2]);
+                                   if(bytesporcalcular>0)//requiere operando
+                                   {
+                                      requiereoperando="REL9";
+                                   }
+                                break;
+                   case "REL16":  System.out.println("Modo:"+lineamodos[0]);
+                                bytesporcalcular = Integer.parseInt(lineamodos[2]);
+                                   if(bytesporcalcular>0)//requiere operando
+                                   {
+                                      requiereoperando="REL16";
                                    }
                                 break;
                    
-                   default: System.out.println("No creo que caiga aqui");
+                   default: System.out.println("Algo raro paso en la funcion EvaluarModosDir..");
                }
                
-             }
-             
-        }
+           
        
         
      

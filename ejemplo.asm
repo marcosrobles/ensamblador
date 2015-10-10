@@ -1,5 +1,9 @@
 	ABA
-	ADCA   algo
+	ADDD	operando
+	BCC	operando	
+	DBEQ	operando
+	LBCC	operando
+	ADCA
 	M.O.S     
 ORG	%00001111 
 	M.O.S

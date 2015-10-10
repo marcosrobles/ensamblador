@@ -1,0 +1,9 @@
+	ADCA 	#%abc
+	ADCA 	#@8
+	ADCA 	#$p
+	ADCA 	#a
+	ADCA 	%10101
+	ADCA 	@012
+	ADCA 	$A1E2
+	ADCA 	10
+	END

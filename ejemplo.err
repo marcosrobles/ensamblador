@@ -1,13 +1,13 @@
 LINEA ERROR
 -----------------------------------------
-3	Caracteres invalidos en el codop
+7	Caracteres invalidos en el codop
 
-4	Tamaño maximo(5) sobrepasado en el codop
+8	Tamaño maximo(5) sobrepasado en el codop
 
-4	Caracteres invalidos en el codop
+8	Caracteres invalidos en el codop
 
-5	Caracteres invalidos en el codop
+9	Caracteres invalidos en el codop
 
-6	El codop no se encuentra en el tabop
+10	El codop no se encuentra en el tabop
 
-9	No requiere operando
+13	No requiere operando

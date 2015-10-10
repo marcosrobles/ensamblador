@@ -119,7 +119,7 @@ public class Linea {
                     //los modos de direccionamiento que guarde en un arreglo de strings(modoslinea)
                     //el token que contiene el modo de direccionamiento, y segun sea este lo clasifique en un switch
                     //Y entonces ahi es donde se evaluara posteriormente cada modo de direccionamiento
-                     evalua_lineas.EvaluarModosDir();
+                     
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);
                     evalua_lineas.et_valida=true;
                     
@@ -145,7 +145,7 @@ public class Linea {
                       operando = guarda_tokens[1];
                   
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
-                      evalua_lineas.EvaluarModosDir();
+                    
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);  
                       evalua_lineas.et_valida=true;
                       
@@ -195,7 +195,7 @@ public class Linea {
            
                       evalua_lineas.EvaluarEtiqueta(etiqueta,cuentalineas,seleccionado,et_sola);
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
-                      evalua_lineas.EvaluarModosDir();
+                  
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);     
                       
                       modos=evalua_lineas.modos; 
@@ -218,7 +218,7 @@ public class Linea {
                      
                       evalua_lineas.EvaluarEtiqueta(etiqueta,cuentalineas,seleccionado,et_sola);
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
-                      evalua_lineas.EvaluarModosDir();
+                 
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);   
                       
                       modos=evalua_lineas.modos; 
