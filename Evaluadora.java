@@ -22,7 +22,7 @@ public class Evaluadora {
       String modos="";
  
     
-      String requiereoperando="";
+      String []requiereoperando=new String[12];
        boolean et_valida, codop_valido,op_valido=false;
        boolean es_binario,es_octal,es_hex,es_dec=false;
        int rango;
@@ -143,31 +143,63 @@ public class Evaluadora {
     
     public void EvaluarOperando(String operando, short cuentalineas, File seleccionado)
     {
-        EvaluarModosDir();
+         
+          
         char  basenum=' ';
+        boolean modo_ok=false;
         if(codop_valido==false)//si es un codop invalido no es necesario evaluar el operando
         {
             
         }
         else 
-        {          
-            //Evaluo el operando segun el modo de direccionamiento identificado
-        switch(requiereoperando)//todos solo entran al switch si requieren operando a exepcion del inherente
+        {       
+          EvaluarModosDir();
+          //si llega a este punto es porque ya evalue que ese modo de direccionamiento requiere operando
+         
+              
+             for(String elemento:requiereoperando)
         {
-                  case "INH": 
-                                if(operando==null)   //si efectivamente no hay operando esta bien
-                            {
-                                 op_valido=true;
-                            }
-                                else    //si hay operando esta mal, no importan bases numericas ni nada en este modo
-                                {   
-                                   
-                                   maneja_errores.errores_operando(cuentalineas, 2, seleccionado);
-                                   op_valido=false;
+            
+             if(modo_ok==true)//Si op_valido es true ya no necesito evaluar el operando en mas modos, creo
+              {
+               break;  
+              }
+             else
+             {
+             
+            if(operando==null)
+            {
+                
+                if(elemento=="INH")
+                {
+                    if(modo_ok==true)
+                                {
+                                 break;  
                                 }
-                                
-                                break;
+                              
+                                 op_valido=true;
+                                 modo_ok=true;
+                }
+                else   //Entonces si el operando es null,y no es el modo inherente, indico en el archivo de errores que se requiere un operando 
+                {
+                                    maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
+                                   op_valido=false;                              
+                }        
+            }
+            else
+            {
+            
+            
+            //Evaluo el operando segun el modo de direccionamiento identificado
+            String modo=elemento;
+            if(modo!=null)
+            {
+            
+           
+        switch(modo)//todos solo entran al switch si requieren operando a exepcion del inherente
+        {
                   case "IMM8":  
+                      
                                 if(operando==null)
                             {
                                 op_valido=false;
@@ -179,7 +211,7 @@ public class Evaluadora {
                                 boolean inm = operando.startsWith("#",0);
                                    if(inm==true)//si operando inicia con #
                                    { //entonces evaluaremos lo demas.
-                                       op_valido=true;
+                                     
                                        
                                        
                                        basenum = operando.charAt(1);//obtenener que base numerica es
@@ -194,17 +226,25 @@ public class Evaluadora {
                                            //Evaluar si excede el rango de 8 o 16 bit segun la base.
                                            case '%'://BINARIO
                                                     Pattern patron_base_binaria = Pattern.compile("(0|1)+");
-                                                    Matcher comprobadorbinario = patron_base_binaria.matcher(operando);
+                                                    String suboperando=""; 
+                                                    suboperando=operando.substring(2);
+                                                    Matcher comprobadorbinario = patron_base_binaria.matcher(suboperando);
                                                     es_binario = comprobadorbinario.matches();
-                                                    if(es_binario==false)
+                                                    if(es_binario==true)
                                                     {
-                                                         op_valido=false;
-                                                         maneja_errores.errores_operando(cuentalineas, 4, seleccionado);
+                                                      rango =  Integer.parseInt(suboperando,2);// convierte el numero binario a base 10 
+                                                      
+                                                     //para conocer o entender  que rango tiene 
+                                                    System.out.println("rango: "+rango);                          
+                                                     op_valido=true;
+                                                      modo_ok=true;
+                                                         
                                                     }
-                                                     String suboperando=""; 
-                                                     suboperando=operando.substring(2);
-                                                    rango =  Integer.parseInt(suboperando,10);
-                                                    System.out.println("rango: "+rango);
+                                                    else
+                                                    {
+                                                     maneja_errores.errores_operando(cuentalineas, 4, seleccionado);
+                                                    op_valido=false;
+                                                    }
                                                      
                                                   
                                                       break;
@@ -212,30 +252,47 @@ public class Evaluadora {
                                                     Pattern patron_base_octal = Pattern.compile("(0-7)+");
                                                     Matcher comprobadoroctal = patron_base_octal.matcher(operando);
                                                     es_octal = comprobadoroctal.matches();
-                                                    if(es_octal==false)
+                                                    if(es_octal==true)
                                                     {
-                                                         op_valido=false;
-                                                         maneja_errores.errores_operando(cuentalineas, 5, seleccionado);
+                                                       op_valido=true;
+                                                      modo_ok=true;  
+                                                    }
+                                                    else
+                                                    {
+                                                       op_valido=false;
+                                                         maneja_errores.errores_operando(cuentalineas, 5, seleccionado); 
                                                     }
                                                       break;
                                            case '$': //HEXADECIMAL
                                                     Pattern patron_base_hex = Pattern.compile("[0-9A-Fa-f]+");
                                                     Matcher comprobador_hex = patron_base_hex.matcher(operando);
                                                     es_hex = comprobador_hex.matches();
-                                                    if(es_hex==false)
+                                                    if(es_hex==true)
                                                     {
-                                                         op_valido=false;
-                                                         maneja_errores.errores_operando(cuentalineas, 6, seleccionado);
+                                                       op_valido=true;
+                                                      modo_ok=true;  
+                                                    }
+                                                    else
+                                                    {
+                                                     op_valido=false;
+                                                     maneja_errores.errores_operando(cuentalineas, 6, seleccionado);   
                                                     }
                                                       break;
                                            default: //DECIMAL 
+                                                    //evaluar primero que si no es decimal no entre, 
+                                                    //por ejemplo si el operando empieza con un simbolo raro o punto o asi.
                                                     Pattern patron_base_decimal = Pattern.compile("[0-9]+");
                                                     Matcher comprobador_decimal = patron_base_decimal.matcher(operando);
                                                     es_dec = comprobador_decimal.matches();
-                                                    if(es_dec==false)
+                                                    if(es_dec==true)
                                                     {
-                                                         op_valido=false;
-                                                         maneja_errores.errores_operando(cuentalineas, 7, seleccionado);
+                                                         op_valido=true;
+                                                      modo_ok=true;
+                                                    }
+                                                    else
+                                                    {
+                                                      op_valido=false;
+                                                      maneja_errores.errores_operando(cuentalineas, 7, seleccionado); 
                                                     }
                                                     break;
                                        }
@@ -260,7 +317,7 @@ public class Evaluadora {
                                 boolean inm = operando.startsWith("#",0);
                                    if(inm==true)//si operando inicia con #
                                    { //entonces evaluaremos lo demas.
-                                       op_valido=true;
+                                      
                                        
                                        
                                        basenum = operando.charAt(1);//obtenener que base numerica es
@@ -334,7 +391,7 @@ public class Evaluadora {
                             else
                             {
                                  //evaluar operando y validarlo
-                                op_valido=true;
+                           //     op_valido=true;
                             }
                                 break;
                    case "EXT":  
@@ -346,7 +403,7 @@ public class Evaluadora {
                             else
                             {
                                  //evaluar operando y validarlo
-                                op_valido=true;
+                              //  op_valido=true;
                             }
                                 break;
                    case "IDX":  
@@ -358,7 +415,7 @@ public class Evaluadora {
                             else
                             {
                                  //evaluar operando y validarlo
-                                op_valido=true;
+                             //   op_valido=true;
                             }
                                 break;
                    case "IDX1": 
@@ -370,7 +427,7 @@ public class Evaluadora {
                             else
                             {
                                  //evaluar operando y validarlo
-                                op_valido=true;
+                               // op_valido=true;
                             }
                                 break;
                    case "IDX2": 
@@ -382,7 +439,7 @@ public class Evaluadora {
                             else
                             {
                                  //evaluar operando y validarlo
-                                op_valido=true;
+                               // op_valido=true;
                             }
                                 break;
                    case "[D,IDX]":
@@ -394,7 +451,7 @@ public class Evaluadora {
                             else
                             {
                                  //evaluar operando y validarlo
-                                op_valido=true;
+                                //op_valido=true;
                             }
                                 break;
                    case "[IDX2]":
@@ -406,7 +463,7 @@ public class Evaluadora {
                             else
                             {
                                  //evaluar operando y validarlo
-                                op_valido=true;
+                              //  op_valido=true;
                             }
                                 break;
                    case "REL8":  
@@ -418,7 +475,7 @@ public class Evaluadora {
                             else
                             {
                                  //evaluar operando y validarlo
-                                op_valido=true;
+                             //   op_valido=true;
                             }
                                 break;
                     case "REL9":  
@@ -430,7 +487,7 @@ public class Evaluadora {
                             else
                             {
                                  //evaluar operando y validarlo
-                                op_valido=true;
+                             //   op_valido=true;
                             }
                                 break;
                     case "REL16":  
@@ -442,7 +499,7 @@ public class Evaluadora {
                             else
                             {
                                  //evaluar operando y validarlo
-                                op_valido=true;
+                               
                             }
                                 break;
                    
@@ -455,15 +512,23 @@ public class Evaluadora {
                          }
             
                        }
+         }
         }
-      
-                
-        }
+       }//llave else (si operando no es null)
+             }
+      }    //llave for each      
+     }
+          
     }
     
     
-    public void EvaluarModosDir()
+    public void EvaluarModosDir()//EL PROBLEMA ESTA AQUI 
     {
+        int bytesporcalcular=0; 
+        for(String elem:lineamodos)  //inicializar lineamodos
+        {
+            elem="";
+        }
         if(codop_valido==false)//si es un codop invalido no es necesario evaluar el modo de direccionamiento
         {
             
@@ -476,6 +541,7 @@ public class Evaluadora {
         for(String elemento:hc12.modoslinea)//este es el contenido del arbol que guarda los modos de 
                                             //direccionamiento de cada codop
         {
+            
              if(elemento!=null)
              {
            
@@ -489,26 +555,30 @@ public class Evaluadora {
                              x++;
                         }
                       
-              }
+              
              
-        }
-                        if(lineamodos!=null)
-                          {
+                        
+                        
                                 modos=modos+" "+lineamodos[0]; 
-                          }
-                      int bytesporcalcular = Integer.parseInt(lineamodos[2]);
+                               
+                                    bytesporcalcular = Integer.parseInt(lineamodos[2]);
+                               
+                                
+                          
+                      
                       //IDENTIFICO MODOS DE DIRECCIONAMIENTO DEL CODOP 
+                      //Este switch identifica que modo de direccionamiento es y si requiere operando
                switch(lineamodos[0])
                {
                    case "INH":  
                                 System.out.println("Modo:"+lineamodos[0]);
-                                requiereoperando="INH";//ya se que no requiere operando, pero lo mando a evaluar operando  
+                                requiereoperando[0]="INH";//ya se que no requiere operando, pero lo mando a evaluar operando  
                                 break;
                    case "IMM8":  System.out.println("Modo:"+lineamodos[0]);
                                   bytesporcalcular = Integer.parseInt(lineamodos[2]);
-                                   if(bytesporcalcular>0)//requiere operando
+                                   if(bytesporcalcular>0)//si requiere operando
                                    {
-                                      requiereoperando="IMM8";
+                                      requiereoperando[1]="IMM8";
                                      
                                    }
                                 break;
@@ -516,7 +586,7 @@ public class Evaluadora {
                                   bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//requiere operando
                                    {
-                                      requiereoperando="IMM16";
+                                      requiereoperando[2]="IMM16";
                                      
                                    }
                                 break;
@@ -525,81 +595,85 @@ public class Evaluadora {
                                   bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//requiere operando
                                    {
-                                      requiereoperando="DIR";
+                                      requiereoperando[3]="DIR";
                                    }
                                 break;
                    case "EXT":  System.out.println("Modo:"+lineamodos[0]);
                                  bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//requiere operando
                                    {
-                                      requiereoperando="EXT";
+                                      requiereoperando[4]="EXT";
                                    }
                                 break;
                    case "IDX":  System.out.println("Modo:"+lineamodos[0]);
                                  bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//requiere operando
                                    {
-                                      requiereoperando="IDX";
+                                      requiereoperando[5]="IDX";
                                    }
                                 break;
                    case "IDX1": System.out.println("Modo:"+lineamodos[0]);
                                  bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//requiere operando
                                    {
-                                      requiereoperando="IDX1";
+                                      requiereoperando[6]="IDX1";
                                    }
                                 break;
                    case "IDX2": System.out.println("Modo:"+lineamodos[0]);
                                  bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//requiere operando
                                    {
-                                      requiereoperando="IDX2";
+                                      requiereoperando[7]="IDX2";
                                    }
                                 break;
                    case "[D,IDX]":System.out.println("Modo:"+lineamodos[0]);
                                     bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//requiere operando
                                    {
-                                      requiereoperando="[D,IDX]";
+                                      requiereoperando[8]="[D,IDX]";
                                    }
                                 break;
                    case "[IDX2]":System.out.println("Modo:"+lineamodos[0]);
                                   bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//requiere operando
                                    {
-                                      requiereoperando="[IDX2]";
+                                      requiereoperando[9]="[IDX2]";
                                    }
                                 break;
                    case "REL8":  System.out.println("Modo:"+lineamodos[0]);
                                 bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//requiere operando
                                    {
-                                      requiereoperando="REL8";
+                                      requiereoperando[10]="REL8";
                                    }
                                 break;
                    case "REL9":  System.out.println("Modo:"+lineamodos[0]);
                                 bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//requiere operando
                                    {
-                                      requiereoperando="REL9";
+                                      requiereoperando[11]="REL9";
                                    }
                                 break;
                    case "REL16":  System.out.println("Modo:"+lineamodos[0]);
                                 bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//requiere operando
                                    {
-                                      requiereoperando="REL16";
+                                      requiereoperando[12]="REL16";
                                    }
                                 break;
                    
                    default: System.out.println("Algo raro paso en la funcion EvaluarModosDir..");
                }
+         
+                        
                
            
        
-        
+             }
+            
      
-        }    
+        }//llave for each
+        }
     }
     
     

@@ -2,17 +2,15 @@ LINEA ETIQUETA CODOP    OPERANDO    MODOS
 --------------------------------------------------------------------------------
 1	null	ABA	null		 INH
 
-2	null	ADDD	operando		 IMM16 DIR EXT IDX IDX1 IDX2 [D,IDX] [IDX2]
+2	null	ADDD	operando		 [IDX2]
 
-3	null	BCC	operando		 REL8 REL16
+3	null	BCC	operando		 REL16
 
 4	null	DBEQ	operando		 REL9
 
 5	null	LBCC	operando		 REL16
 
-6	null	ADCA	algo		 IMM8 DIR EXT IDX IDX1 IDX2 [D,IDX] [IDX2]
-
-11	dos	LDAA	@4732		 IMM8 DIR EXT IDX IDX1 IDX2 [D,IDX] [IDX2]
+11	dos	LDAA	@4732		 [IDX2]
 
 12	null	SWI	null		 INH
 

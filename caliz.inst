@@ -1,17 +1,5 @@
 LINEA ETIQUETA CODOP    OPERANDO    MODOS                       
 --------------------------------------------------------------------------------
-1	null	ADCA	#%abc		 [IDX2]
+1	null	ABA	null		 INH
 
-2	null	ADCA	#@8		 [IDX2]
-
-3	null	ADCA	#$p		 [IDX2]
-
-4	null	ADCA	#a		 [IDX2]
-
-5	null	ADCA	%10101		 [IDX2]
-
-6	null	ADCA	@012		 [IDX2]
-
-7	null	ADCA	$A1E2		 [IDX2]
-
-8	null	ADCA	10		 [IDX2]
+2	null	ADCA	#%10101		 IMM8 DIR EXT IDX IDX1 IDX2 [D,IDX] [IDX2]

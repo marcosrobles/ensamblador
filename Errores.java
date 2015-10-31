@@ -93,12 +93,16 @@ public class Errores {
                writeFileErrores(cuentalineas,error,seleccionado);
                 break;
              case 4: error="Este numero no es binario (El simbolo % indica que debe ser binario)";
+                     writeFileErrores(cuentalineas,error,seleccionado);
                   break;
              case 5: error="Este numero no es octal (El simbolo @ indica que debe ser octal)";
+                        writeFileErrores(cuentalineas,error,seleccionado);
                   break;
              case 6: error="Este numero no es hexadecimal (El simbolo $ indica que debe ser hexadecimal)";
+                        writeFileErrores(cuentalineas,error,seleccionado);
                   break;
              case 7: error="Este numero no es decimal";
+                    writeFileErrores(cuentalineas,error,seleccionado);
                   break;
             
         }

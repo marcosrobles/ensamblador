@@ -1,2 +1,35 @@
 LINEA ERROR
 -----------------------------------------
+2	No requiere operando
+
+3	No requiere operando
+
+3	Este numero no es binario (El simbolo % indica que debe ser binario)
+
+4	No requiere operando
+
+4	Este numero no es octal (El simbolo @ indica que debe ser octal)
+
+5	No requiere operando
+
+5	Este numero no es hexadecimal (El simbolo $ indica que debe ser hexadecimal)
+
+6	No requiere operando
+
+6	Este numero no es decimal
+
+7	No requiere operando
+
+7	Modo IMM requiere # al inicio
+
+8	No requiere operando
+
+8	Modo IMM requiere # al inicio
+
+9	No requiere operando
+
+9	Modo IMM requiere # al inicio
+
+10	No requiere operando
+
+10	Modo IMM requiere # al inicio
