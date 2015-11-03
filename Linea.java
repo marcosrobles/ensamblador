@@ -145,7 +145,7 @@ public class Linea {
                       operando = guarda_tokens[1];
                   
                       evalua_lineas.EvaluarCodop(codop,cuentalineas,seleccionado);
-                    
+                      
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);  
                       evalua_lineas.et_valida=true;
                       

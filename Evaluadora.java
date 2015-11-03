@@ -23,6 +23,7 @@ public class Evaluadora {
  
     
       String []requiereoperando=new String[12];
+      boolean norequiereop,requiereop=false;
        boolean et_valida, codop_valido,op_valido=false;
        boolean es_binario,es_octal,es_hex,es_dec=false;
        int rango;
@@ -144,7 +145,8 @@ public class Evaluadora {
     public void EvaluarOperando(String operando, short cuentalineas, File seleccionado)
     {
          
-          
+        requiereop=false;
+        norequiereop=false;
         char  basenum=' ';
         boolean modo_ok=false;
         if(codop_valido==false)//si es un codop invalido no es necesario evaluar el operando
@@ -153,13 +155,24 @@ public class Evaluadora {
         }
         else 
         {       
-          EvaluarModosDir();
-          //si llega a este punto es porque ya evalue que ese modo de direccionamiento requiere operando
-         
+          //aqui inicializar a requiere operando
+          EvaluarModosDir(operando,cuentalineas,seleccionado);
+          //si llega a este punto es porque ya evalue que ese modo de direccionamiento y requiere operando
+          //si no requiere operando, no va a evaluarse en el switch
               
              for(String elemento:requiereoperando)
-        {
-            
+        {  
+           if(elemento==null)//si elemento no contiene nada significa que no requirio operando(no aplica para inherente)
+           {//ese codop con ese modo de direccionamiento no requiere operando
+               if(operando!=null) //y si tiene operando manda error(no requiere operando)
+               {
+                   norequiereop=true;
+                     
+                   
+               }
+           }
+           else  //si elemento contiene algo significa que requiere operando(en cualquier modo de direccionamiento menos inherente)                          
+           {
              if(modo_ok==true)//Si op_valido es true ya no necesito evaluar el operando en mas modos, creo
               {
                break;  
@@ -167,10 +180,10 @@ public class Evaluadora {
              else
              {
              
-            if(operando==null)
+            if(operando==null)  
             {
                 
-                if(elemento=="INH")
+                if(elemento=="INH")//y si no tiene operando pero es INH esta bien
                 {
                     if(modo_ok==true)
                                 {
@@ -182,31 +195,31 @@ public class Evaluadora {
                 }
                 else   //Entonces si el operando es null,y no es el modo inherente, indico en el archivo de errores que se requiere un operando 
                 {
-                                    maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
-                                   op_valido=false;                              
+                                    requiereop=true;                                                  
                 }        
             }
             else
             {
-            
-            
+                //si requiere operando y tiene operando
             //Evaluo el operando segun el modo de direccionamiento identificado
-            String modo=elemento;
-            if(modo!=null)
-            {
+                
+             if(elemento=="INH")//y es INH esta mal
+                {
+                   
+                              norequiereop=true;
+                                 op_valido=false;
+                                 modo_ok=false;
+                }
             
            
-        switch(modo)//todos solo entran al switch si requieren operando a exepcion del inherente
+            
+            
+           
+        switch(elemento)//todos solo entran al switch si requieren operando a exepcion del inherente
         {
                   case "IMM8":  
                       
-                                if(operando==null)
-                            {
-                                op_valido=false;
-                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
-                            }
-                            else
-                            {
+                               
                                  //evaluar operando y validarlo
                                 boolean inm = operando.startsWith("#",0);
                                    if(inm==true)//si operando inicia con #
@@ -297,25 +310,15 @@ public class Evaluadora {
                                                     break;
                                        }
                                    }
-                                   else //operando en modo IMM no inicio con #
-                                   { //escribimos error en archivo .err
-                                       maneja_errores.errores_operando(cuentalineas, 3, seleccionado);
-                                       op_valido=false;
-                                   }
+                                   
                                 
-                            }
+                            
                                 break;
                    case "IMM16":  
-                                if(operando==null)
-                            {
-                                op_valido=false;
-                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
-                            }
-                            else
-                            {
+                               
                                  //evaluar operando y validarlo
-                                boolean inm = operando.startsWith("#",0);
-                                   if(inm==true)//si operando inicia con #
+                                boolean inm16 = operando.startsWith("#",0);
+                                   if(inm16==true)//si operando inicia con #
                                    { //entonces evaluaremos lo demas.
                                       
                                        
@@ -379,156 +382,80 @@ public class Evaluadora {
                                        op_valido=false;
                                    }
                                 
-                            }
+                            
                                 break;   
                        
                    case "DIR":  
-                                if(operando==null)
-                            {
-                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
-                                op_valido=false;
-                            }
-                            else
-                            {
-                                 //evaluar operando y validarlo
-                           //     op_valido=true;
-                            }
+                                
                                 break;
                    case "EXT":  
-                                if(operando==null)
-                            {
-                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
-                                op_valido=false;
-                            }
-                            else
-                            {
-                                 //evaluar operando y validarlo
-                              //  op_valido=true;
-                            }
+                                
                                 break;
                    case "IDX":  
-                                if(operando==null)
-                            {
-                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
-                                op_valido=false;
-                            }
-                            else
-                            {
-                                 //evaluar operando y validarlo
-                             //   op_valido=true;
-                            }
+                                
                                 break;
                    case "IDX1": 
-                                if(operando==null)
-                            {
-                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
-                                op_valido=false;
-                            }
-                            else
-                            {
-                                 //evaluar operando y validarlo
-                               // op_valido=true;
-                            }
+                                
                                 break;
                    case "IDX2": 
-                                if(operando==null)
-                            {
-                                op_valido=false;
-                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
-                            }
-                            else
-                            {
-                                 //evaluar operando y validarlo
-                               // op_valido=true;
-                            }
+                                
                                 break;
                    case "[D,IDX]":
-                                    if(operando==null)
-                            {
-                                op_valido=false;
-                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
-                            }
-                            else
-                            {
-                                 //evaluar operando y validarlo
-                                //op_valido=true;
-                            }
+                                    
                                 break;
                    case "[IDX2]":
-                                    if(operando==null)
-                            {
-                                op_valido=false;
-                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
-                            }
-                            else
-                            {
-                                 //evaluar operando y validarlo
-                              //  op_valido=true;
-                            }
+                                  
                                 break;
                    case "REL8":  
-                                if(operando==null)
-                            {
-                                op_valido=false;
-                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
-                            }
-                            else
-                            {
-                                 //evaluar operando y validarlo
-                             //   op_valido=true;
-                            }
+                              
                                 break;
                     case "REL9":  
-                                if(operando==null)
-                            {
-                                op_valido=false;
-                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
-                            }
-                            else
-                            {
-                                 //evaluar operando y validarlo
-                             //   op_valido=true;
-                            }
+                               
                                 break;
                     case "REL16":  
-                                if(operando==null)
-                            {
-                                op_valido=false;
-                                maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
-                            }
-                            else
-                            {
-                                 //evaluar operando y validarlo
                                
-                            }
                                 break;
                    
                    default: {
-                       if(operando!=null)
-                         {//si el codop no fue encontrado en tabop, decirle aqui que no evalue el operando o asi
-                 
-                            op_valido=false;
-                            maneja_errores.errores_operando(cuentalineas, 2, seleccionado);
-                         }
+                        //Indicar error de modo de direccionameinto desconocido
+                       
             
                        }
          }
-        }
+        
        }//llave else (si operando no es null)
              }
-      }    //llave for each      
+          
+            
+           }
+          
+           
+      }    //llave for each 
+        if(norequiereop==true)
+        {
+                   maneja_errores.errores_operando(cuentalineas, 2, seleccionado);
+                   op_valido=false;
+        }
+        if(requiereop==true)
+        {
+            maneja_errores.errores_operando(cuentalineas, 1, seleccionado);
+            op_valido=false; 
+        }
      }
           
     }
     
     
-    public void EvaluarModosDir()//EL PROBLEMA ESTA AQUI 
+    public void EvaluarModosDir(String operando, short cuentalineas, File seleccionado)//EL PROBLEMA ESTA AQUI , porque en el arreglo requiereoperando
+                                //se queda el modo INH del codop anterior, siendo que el codop 
+                                //reciente ya no tiene ese modo de direccionamiento
     {
         int bytesporcalcular=0; 
-        for(String elem:lineamodos)  //inicializar lineamodos
-        {
-            elem="";
-        }
+       for(int z=0;z<=11;z++)
+       {
+           this.requiereoperando[z]="";
+       }
+
         if(codop_valido==false)//si es un codop invalido no es necesario evaluar el modo de direccionamiento
         {
             
@@ -541,7 +468,9 @@ public class Evaluadora {
         for(String elemento:hc12.modoslinea)//este es el contenido del arbol que guarda los modos de 
                                             //direccionamiento de cada codop
         {
-            
+                  
+           
+       
              if(elemento!=null)
              {
            
@@ -562,6 +491,8 @@ public class Evaluadora {
                                 modos=modos+" "+lineamodos[0]; 
                                
                                     bytesporcalcular = Integer.parseInt(lineamodos[2]);
+                                    
+                                    
                                
                                 
                           
@@ -571,6 +502,7 @@ public class Evaluadora {
                switch(lineamodos[0])
                {
                    case "INH":  
+             
                                 System.out.println("Modo:"+lineamodos[0]);
                                 requiereoperando[0]="INH";//ya se que no requiere operando, pero lo mando a evaluar operando  
                                 break;
@@ -578,9 +510,9 @@ public class Evaluadora {
                                   bytesporcalcular = Integer.parseInt(lineamodos[2]);
                                    if(bytesporcalcular>0)//si requiere operando
                                    {
-                                      requiereoperando[1]="IMM8";
-                                     
+                                      requiereoperando[1]="IMM8";   
                                    }
+                                   
                                 break;
                     case "IMM16":  System.out.println("Modo:"+lineamodos[0]);
                                   bytesporcalcular = Integer.parseInt(lineamodos[2]);
@@ -673,7 +605,9 @@ public class Evaluadora {
             
      
         }//llave for each
+          
         }
+      
     }
     
     
