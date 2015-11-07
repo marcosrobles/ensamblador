@@ -1,0 +1,545 @@
+LINEA ERROR
+-----------------------------------------
+1	Caracteres invalidos en la etiqueta
+
+1	Tamaño maximo(5) sobrepasado en el codop
+
+1	Caracteres invalidos en el codop
+
+2	Numero de tokens excedido
+
+3	Numero de tokens excedido
+
+4	Numero de tokens excedido
+
+5	Numero de tokens excedido
+
+6	Caracteres invalidos en el codop
+
+7	Caracteres invalidos en el codop
+
+8	Tamaño maximo(5) sobrepasado en el codop
+
+8	Caracteres invalidos en el codop
+
+10	Tamaño maximo(5) sobrepasado en el codop
+
+10	Caracteres invalidos en el codop
+
+11	Tamaño maximo(5) sobrepasado en el codop
+
+11	Caracteres invalidos en el codop
+
+12	Tamaño maximo(5) sobrepasado en el codop
+
+12	Caracteres invalidos en el codop
+
+13	Tamaño maximo(5) sobrepasado en el codop
+
+13	Caracteres invalidos en el codop
+
+14	Tamaño maximo(5) sobrepasado en el codop
+
+14	Caracteres invalidos en el codop
+
+15	Tamaño maximo(5) sobrepasado en el codop
+
+15	Caracteres invalidos en el codop
+
+16	Tamaño maximo(5) sobrepasado en el codop
+
+16	Caracteres invalidos en el codop
+
+17	Tamaño maximo(5) sobrepasado en el codop
+
+17	Caracteres invalidos en el codop
+
+18	Tamaño maximo(5) sobrepasado en el codop
+
+18	Caracteres invalidos en el codop
+
+20	Solo puede haber entre 1-3 tokens
+
+22	El codop no se encuentra en el tabop
+
+23	Tamaño maximo(5) sobrepasado en el codop
+
+23	Caracteres invalidos en el codop
+
+24	Tamaño maximo(5) sobrepasado en el codop
+
+24	Caracteres invalidos en el codop
+
+25	Tamaño maximo(5) sobrepasado en el codop
+
+25	Caracteres invalidos en el codop
+
+26	Tamaño maximo(5) sobrepasado en el codop
+
+26	Caracteres invalidos en el codop
+
+27	Numero de tokens excedido
+
+28	Numero de tokens excedido
+
+29	Numero de tokens excedido
+
+32	Solo puede haber entre 1-3 tokens
+
+35	Caracteres invalidos en el codop
+
+36	Numero de tokens excedido
+
+37	Numero de tokens excedido
+
+38	Caracteres invalidos en el codop
+
+39	Tamaño maximo(5) sobrepasado en el codop
+
+39	Caracteres invalidos en el codop
+
+40	Caracteres invalidos en el codop
+
+41	Numero de tokens excedido
+
+42	Caracteres invalidos en el codop
+
+43	Numero de tokens excedido
+
+44	Numero de tokens excedido
+
+45	Tamaño maximo(5) sobrepasado en el codop
+
+45	Caracteres invalidos en el codop
+
+46	Numero de tokens excedido
+
+49	Tamaño maximo(5) sobrepasado en el codop
+
+49	Caracteres invalidos en el codop
+
+50	Caracteres invalidos en el codop
+
+51	Numero de tokens excedido
+
+52	Tamaño maximo(5) sobrepasado en el codop
+
+52	Caracteres invalidos en el codop
+
+53	Caracteres invalidos en el codop
+
+55	Numero de tokens excedido
+
+56	Tamaño maximo(5) sobrepasado en el codop
+
+56	Caracteres invalidos en el codop
+
+57	Numero de tokens excedido
+
+59	Numero de tokens excedido
+
+60	El codop no se encuentra en el tabop
+
+61	El codop no se encuentra en el tabop
+
+62	Caracteres invalidos en el codop
+
+63	Tamaño maximo(5) sobrepasado en el codop
+
+63	Caracteres invalidos en el codop
+
+64	Caracteres invalidos en el codop
+
+65	Caracteres invalidos en el codop
+
+66	Numero de tokens excedido
+
+67	Numero de tokens excedido
+
+68	El codop no se encuentra en el tabop
+
+69	Caracteres invalidos en el codop
+
+70	Numero de tokens excedido
+
+71	Numero de tokens excedido
+
+73	Numero de tokens excedido
+
+74	Tamaño maximo(5) sobrepasado en el codop
+
+74	Caracteres invalidos en el codop
+
+75	Tamaño maximo(5) sobrepasado en el codop
+
+75	Caracteres invalidos en el codop
+
+76	Tamaño maximo(5) sobrepasado en el codop
+
+76	Caracteres invalidos en el codop
+
+77	Caracteres invalidos en el codop
+
+78	Numero de tokens excedido
+
+79	Numero de tokens excedido
+
+80	Tamaño maximo(5) sobrepasado en el codop
+
+80	Caracteres invalidos en el codop
+
+81	Numero de tokens excedido
+
+82	Tamaño maximo(5) sobrepasado en el codop
+
+82	Caracteres invalidos en el codop
+
+83	Caracteres invalidos en el codop
+
+85	Numero de tokens excedido
+
+86	El codop no se encuentra en el tabop
+
+87	Caracteres invalidos en el codop
+
+88	Numero de tokens excedido
+
+89	Numero de tokens excedido
+
+90	Tamaño maximo(5) sobrepasado en el codop
+
+90	Caracteres invalidos en el codop
+
+91	Tamaño maximo(5) sobrepasado en el codop
+
+91	Caracteres invalidos en el codop
+
+92	Tamaño maximo(5) sobrepasado en el codop
+
+92	Caracteres invalidos en el codop
+
+93	Tamaño maximo(5) sobrepasado en el codop
+
+93	Caracteres invalidos en el codop
+
+94	Caracteres invalidos en el codop
+
+95	Numero de tokens excedido
+
+96	Numero de tokens excedido
+
+97	Tamaño maximo(5) sobrepasado en el codop
+
+97	Caracteres invalidos en el codop
+
+98	Numero de tokens excedido
+
+99	Tamaño maximo(5) sobrepasado en el codop
+
+99	Caracteres invalidos en el codop
+
+100	Caracteres invalidos en el codop
+
+101	Tamaño maximo(5) sobrepasado en el codop
+
+101	Caracteres invalidos en el codop
+
+102	El codop no se encuentra en el tabop
+
+103	Caracteres invalidos en el codop
+
+104	Numero de tokens excedido
+
+105	Tamaño maximo(5) sobrepasado en el codop
+
+105	Caracteres invalidos en el codop
+
+107	Numero de tokens excedido
+
+108	Tamaño maximo(5) sobrepasado en el codop
+
+108	Caracteres invalidos en el codop
+
+109	Tamaño maximo(5) sobrepasado en el codop
+
+109	Caracteres invalidos en el codop
+
+110	Tamaño maximo(5) sobrepasado en el codop
+
+110	Caracteres invalidos en el codop
+
+111	Caracteres invalidos en el codop
+
+112	Tamaño maximo(5) sobrepasado en el codop
+
+112	Caracteres invalidos en el codop
+
+113	Caracteres invalidos en el codop
+
+114	Tamaño maximo(5) sobrepasado en el codop
+
+114	Caracteres invalidos en el codop
+
+115	Caracteres invalidos en el codop
+
+116	Tamaño maximo(5) sobrepasado en el codop
+
+116	Caracteres invalidos en el codop
+
+117	Caracteres invalidos en el codop
+
+118	Numero de tokens excedido
+
+119	Numero de tokens excedido
+
+120	Tamaño maximo(5) sobrepasado en el codop
+
+120	Caracteres invalidos en el codop
+
+121	Numero de tokens excedido
+
+122	Tamaño maximo(5) sobrepasado en el codop
+
+122	Caracteres invalidos en el codop
+
+123	Caracteres invalidos en el codop
+
+125	Caracteres invalidos en el codop
+
+128	Numero de tokens excedido
+
+129	Caracteres invalidos en el codop
+
+130	Numero de tokens excedido
+
+131	Numero de tokens excedido
+
+132	Tamaño maximo(5) sobrepasado en el codop
+
+132	Caracteres invalidos en el codop
+
+133	Numero de tokens excedido
+
+135	Numero de tokens excedido
+
+137	El codop no se encuentra en el tabop
+
+138	Caracteres invalidos en el codop
+
+139	Numero de tokens excedido
+
+141	Tamaño maximo(5) sobrepasado en el codop
+
+141	Caracteres invalidos en el codop
+
+142	Numero de tokens excedido
+
+144	Numero de tokens excedido
+
+145	Numero de tokens excedido
+
+146	Caracteres invalidos en el codop
+
+147	Numero de tokens excedido
+
+151	Numero de tokens excedido
+
+152	Caracteres invalidos en el codop
+
+153	Tamaño maximo(5) sobrepasado en el codop
+
+153	Caracteres invalidos en el codop
+
+154	Numero de tokens excedido
+
+155	Numero de tokens excedido
+
+156	Tamaño maximo(5) sobrepasado en el codop
+
+156	Caracteres invalidos en el codop
+
+158	El codop no se encuentra en el tabop
+
+159	Numero de tokens excedido
+
+160	Caracteres invalidos en el codop
+
+161	Tamaño maximo(5) sobrepasado en el codop
+
+161	Caracteres invalidos en el codop
+
+162	Caracteres invalidos en el codop
+
+163	Caracteres invalidos en el codop
+
+164	Numero de tokens excedido
+
+165	Numero de tokens excedido
+
+166	Numero de tokens excedido
+
+167	Numero de tokens excedido
+
+171	Caracteres invalidos en el codop
+
+172	El codop no se encuentra en el tabop
+
+173	Caracteres invalidos en el codop
+
+175	Caracteres invalidos en el codop
+
+178	Caracteres invalidos en el codop
+
+179	Caracteres invalidos en el codop
+
+180	Tamaño maximo(5) sobrepasado en el codop
+
+180	Caracteres invalidos en el codop
+
+181	Numero de tokens excedido
+
+182	Caracteres invalidos en el codop
+
+183	Tamaño maximo(5) sobrepasado en el codop
+
+183	Caracteres invalidos en el codop
+
+184	Tamaño maximo(5) sobrepasado en el codop
+
+184	Caracteres invalidos en el codop
+
+185	Tamaño maximo(5) sobrepasado en el codop
+
+185	Caracteres invalidos en el codop
+
+186	Caracteres invalidos en el codop
+
+187	Tamaño maximo(5) sobrepasado en el codop
+
+187	Caracteres invalidos en el codop
+
+188	Caracteres invalidos en el codop
+
+189	Numero de tokens excedido
+
+190	Numero de tokens excedido
+
+191	Tamaño maximo(5) sobrepasado en el codop
+
+191	Caracteres invalidos en el codop
+
+192	Numero de tokens excedido
+
+193	Tamaño maximo(5) sobrepasado en el codop
+
+193	Caracteres invalidos en el codop
+
+194	Caracteres invalidos en el codop
+
+195	Caracteres invalidos en el codop
+
+200	Caracteres invalidos en el codop
+
+201	Numero de tokens excedido
+
+202	Tamaño maximo(5) sobrepasado en el codop
+
+202	Caracteres invalidos en el codop
+
+203	Caracteres invalidos en el codop
+
+204	Tamaño maximo(5) sobrepasado en el codop
+
+204	Caracteres invalidos en el codop
+
+205	Caracteres invalidos en el codop
+
+206	Numero de tokens excedido
+
+207	Caracteres invalidos en el codop
+
+209	Numero de tokens excedido
+
+210	Tamaño maximo(5) sobrepasado en el codop
+
+210	Caracteres invalidos en el codop
+
+211	Numero de tokens excedido
+
+213	Numero de tokens excedido
+
+214	El codop no se encuentra en el tabop
+
+215	El codop no se encuentra en el tabop
+
+216	Caracteres invalidos en el codop
+
+217	Tamaño maximo(5) sobrepasado en el codop
+
+217	Caracteres invalidos en el codop
+
+218	Caracteres invalidos en el codop
+
+219	Caracteres invalidos en el codop
+
+220	Numero de tokens excedido
+
+221	El codop no se encuentra en el tabop
+
+222	Caracteres invalidos en el codop
+
+223	Numero de tokens excedido
+
+224	Numero de tokens excedido
+
+225	Tamaño maximo(5) sobrepasado en el codop
+
+225	Caracteres invalidos en el codop
+
+226	Tamaño maximo(5) sobrepasado en el codop
+
+226	Caracteres invalidos en el codop
+
+227	Tamaño maximo(5) sobrepasado en el codop
+
+227	Caracteres invalidos en el codop
+
+228	Tamaño maximo(5) sobrepasado en el codop
+
+228	Caracteres invalidos en el codop
+
+229	Caracteres invalidos en el codop
+
+230	Numero de tokens excedido
+
+231	Numero de tokens excedido
+
+232	Tamaño maximo(5) sobrepasado en el codop
+
+232	Caracteres invalidos en el codop
+
+233	Numero de tokens excedido
+
+234	Tamaño maximo(5) sobrepasado en el codop
+
+234	Caracteres invalidos en el codop
+
+235	Caracteres invalidos en el codop
+
+237	Caracteres invalidos en el codop
+
+242	Numero de tokens excedido
+
+243	Numero de tokens excedido
+
+245	Tamaño maximo(5) sobrepasado en el codop
+
+245	Caracteres invalidos en el codop
+
+246	Caracteres invalidos en el codop
+
+247	Caracteres invalidos en el codop
+
+248	Caracteres invalidos en la etiqueta
+
+248	No se encontro la directiva END

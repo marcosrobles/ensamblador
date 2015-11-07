@@ -8,6 +8,15 @@ import java.io.File;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import   java.util.regex.Pattern;
+
+import static java.lang.Integer.bitCount;
+import static java.lang.Integer.highestOneBit;
+import static java.lang.Integer.lowestOneBit;
+import static java.lang.Integer.numberOfLeadingZeros;
+import static java.lang.Integer.reverse;
+import static java.lang.Integer.reverseBytes;
+import static java.lang.Integer.signum;
+import static java.lang.Integer.toBinaryString;
 /**
  *
  * @author Marcos
@@ -27,6 +36,7 @@ public class Evaluadora {
        boolean et_valida, codop_valido,op_valido=false;
        boolean es_binario,es_octal,es_hex,es_dec=false;
        int rango;
+         String [] modo_ok = new String[13];
   
        
       
@@ -145,10 +155,16 @@ public class Evaluadora {
     public void EvaluarOperando(String operando, short cuentalineas, File seleccionado)
     {
          
+         for(int a=0;a<=11;a++)
+                      {                   
+                        modo_ok[a]=null; 
+                      }
+        
+         
         requiereop=false;
         norequiereop=false;
         char  basenum=' ';
-        boolean modo_ok=false;
+      
         if(codop_valido==false)//si es un codop invalido no es necesario evaluar el operando
         {
             
@@ -162,21 +178,27 @@ public class Evaluadora {
               
              for(String elemento:requiereoperando)
         {  
+             
            if(elemento==null)//si elemento no contiene nada significa que no requirio operando(no aplica para inherente)
            {//ese codop con ese modo de direccionamiento no requiere operando
                if(operando!=null) //y si tiene operando manda error(no requiere operando)
                {
                    norequiereop=true;
-                     
+                   //Esta variable sirve para indicar este error posteriormente  
                    
                }
            }
            else  //si elemento contiene algo significa que requiere operando(en cualquier modo de direccionamiento menos inherente)                          
            {
-             if(modo_ok==true)//Si op_valido es true ya no necesito evaluar el operando en mas modos, creo
+ 
+             if(modo_ok[0]=="INH"||modo_ok[1]=="IMM8"||modo_ok[2]=="IMM16"
+                     ||modo_ok[3]=="DIR"||modo_ok[4]=="EXT"||modo_ok[5]=="IDX"||modo_ok[6]=="IDX1"||modo_ok[7]=="IDX2"
+                     ||modo_ok[8]=="[D,IDX]"||modo_ok[9]=="[IDX2]"||modo_ok[10]=="REL8"||modo_ok[11]=="REL9"||modo_ok[12]=="REL16")//Si op_valido es true ya no necesito evaluar el operando en mas modos, creo
               {
-               break;  
+                   break; 
+                   
               }
+             
              else
              {
              
@@ -185,13 +207,15 @@ public class Evaluadora {
                 
                 if(elemento=="INH")//y si no tiene operando pero es INH esta bien
                 {
-                    if(modo_ok==true)
+                    if(modo_ok[0]=="INH"||modo_ok[1]=="IMM8"||modo_ok[2]=="IMM16"
+                     ||modo_ok[3]=="DIR"||modo_ok[4]=="EXT"||modo_ok[5]=="IDX"||modo_ok[6]=="IDX1"||modo_ok[7]=="IDX2"
+                     ||modo_ok[8]=="[D,IDX]"||modo_ok[9]=="[IDX2]"||modo_ok[10]=="REL8"||modo_ok[11]=="REL9"||modo_ok[12]=="REL16")
                                 {
                                  break;  
                                 }
                               
                                  op_valido=true;
-                                 modo_ok=true;
+                                 modo_ok[0]="INH";
                 }
                 else   //Entonces si el operando es null,y no es el modo inherente, indico en el archivo de errores que se requiere un operando 
                 {
@@ -208,7 +232,7 @@ public class Evaluadora {
                    
                               norequiereop=true;
                                  op_valido=false;
-                                 modo_ok=false;
+                                 modo_ok[0]="";
                 }
             
            
@@ -238,6 +262,7 @@ public class Evaluadora {
                                            //convertirlo a la base especificada
                                            //Evaluar si excede el rango de 8 o 16 bit segun la base.
                                            case '%'://BINARIO
+                                                    rango=0;
                                                     Pattern patron_base_binaria = Pattern.compile("(0|1)+");
                                                     String suboperando=""; 
                                                     suboperando=operando.substring(2);
@@ -245,13 +270,30 @@ public class Evaluadora {
                                                     es_binario = comprobadorbinario.matches();
                                                     if(es_binario==true)
                                                     {
-                                                      rango =  Integer.parseInt(suboperando,2);// convierte el numero binario a base 10 
+                                                      rango =  Integer.parseInt(suboperando,10);// convierte el numero N a base B 
+                                                      int rango3 = reverse(rango);
+                                                      String rango4 = toBinaryString(rango3);
+                                                      
+                                                       int zeros = numberOfLeadingZeros(rango3);
+                                                       int signo = signum(rango);
+                                                      
+                                                    //  String rango3=Integer.toString(rango2,10);
+                                                       
                                                       
                                                      //para conocer o entender  que rango tiene 
-                                                    System.out.println("rango: "+rango);                          
+                                                      if(rango>255)
+                                                      {
+                                                          System.out.println("Error: Excede el rango de 8 bits: ");  
+                                                      }
+                                                        
+                                                    
+                                                      System.out.println("rango: "+rango);  
+                                                      System.out.println("reverse: "+rango4);
+                                 
+                                                          System.out.println("zeros: "+zeros);
+                                                          System.out.println("signo: "+signo);
                                                      op_valido=true;
-                                                      modo_ok=true;
-                                                         
+                                                      modo_ok[1]="IMM8";   
                                                     }
                                                     else
                                                     {
@@ -268,7 +310,7 @@ public class Evaluadora {
                                                     if(es_octal==true)
                                                     {
                                                        op_valido=true;
-                                                      modo_ok=true;  
+                                                        modo_ok[1]="IMM8";  
                                                     }
                                                     else
                                                     {
@@ -283,7 +325,7 @@ public class Evaluadora {
                                                     if(es_hex==true)
                                                     {
                                                        op_valido=true;
-                                                      modo_ok=true;  
+                                                      modo_ok[1]="IMM8";   
                                                     }
                                                     else
                                                     {
@@ -300,7 +342,7 @@ public class Evaluadora {
                                                     if(es_dec==true)
                                                     {
                                                          op_valido=true;
-                                                      modo_ok=true;
+                                                      modo_ok[1]="IMM8"; 
                                                     }
                                                     else
                                                     {
@@ -425,6 +467,7 @@ public class Evaluadora {
         
        }//llave else (si operando no es null)
              }
+          
           
             
            }

@@ -124,12 +124,18 @@ public class Linea {
                     evalua_lineas.et_valida=true;
                     
                   
-                     
-                        modos=evalua_lineas.modos; 
-                        
-                      lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
+                    for(int a=0;a<=11;a++)
+                      {
+                         
+                     if(evalua_lineas.modo_ok[a]!=null)
+                     {
+                        modos=evalua_lineas.modo_ok[a]; 
+                        lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
+                        EscribeLinea(lineainstrucciones, seleccionado);
+                     }
+                      }
+                          
                     
-                    EscribeLinea(lineainstrucciones, seleccionado);
                  
                       break;
                       //
@@ -149,10 +155,16 @@ public class Linea {
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);  
                       evalua_lineas.et_valida=true;
                       
-                      modos=evalua_lineas.modos; 
-                      lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
-                      
-                      EscribeLinea(lineainstrucciones, seleccionado);
+                     for(int a=0;a<=11;a++)
+                      {
+                         
+                     if(evalua_lineas.modo_ok[a]!=null)
+                     {
+                        modos=evalua_lineas.modo_ok[a]; 
+                        lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
+                        EscribeLinea(lineainstrucciones, seleccionado);
+                     }
+                      }
                       break;
                   default://OTRO
                       error="Numero de tokens excedido"; 
@@ -198,11 +210,16 @@ public class Linea {
                   
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);     
                       
-                      modos=evalua_lineas.modos; 
-                      lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
-                      
-                      EscribeLinea(lineainstrucciones, seleccionado);
-                     
+                      for(int a=0;a<=11;a++)
+                      {
+                         
+                     if(evalua_lineas.modo_ok[a]!=null)
+                     {
+                        modos=evalua_lineas.modo_ok[a]; 
+                        lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
+                        EscribeLinea(lineainstrucciones, seleccionado);
+                     }
+                      }
               
                       break;
                   case 3://a.ETIQUETA, CODOP, OPERANDO
@@ -221,10 +238,16 @@ public class Linea {
                  
                       evalua_lineas.EvaluarOperando(operando,cuentalineas,seleccionado);   
                       
-                      modos=evalua_lineas.modos; 
-                      lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
-                      
-                      EscribeLinea(lineainstrucciones, seleccionado);
+                      for(int a=0;a<=11;a++)
+                      {
+                         
+                     if(evalua_lineas.modo_ok[a]!=null)
+                     {
+                        modos=evalua_lineas.modo_ok[a]; 
+                        lineainstrucciones=cuentalineas+"\t"+etiqueta+"\t"+codop+"\t"+operando+"\t\t"+modos;
+                        EscribeLinea(lineainstrucciones, seleccionado);
+                     }
+                      }
         
                       break;
                   default://OTRO

@@ -1,0 +1,7 @@
+LINEA ERROR
+-----------------------------------------
+3	Este numero no es octal (El simbolo @ indica que debe ser octal)
+
+4	Este numero no es hexadecimal (El simbolo $ indica que debe ser hexadecimal)
+
+5	Este numero no es decimal
